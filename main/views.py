@@ -21,9 +21,9 @@ def index_login(request):
             errors = {'error': '用户名或者密码错误，请重新输入'}
     return render(request, 'login.html', errors)
 
-@login_required()
-def index(request):
-    pass
+# @login_required()
+# def index(request):
+#     pass
 
 def acc_logout(request):
     logout(request)
