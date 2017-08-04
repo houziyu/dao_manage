@@ -1,0 +1,10 @@
+import docker
+class docker_initial(object):
+    def __init__(self):
+        self.client = docker.DockerClient(base_url='tcp://192.168.1.183:2375')
+    def docker_name(self):
+        names = []
+        container_list = self.client.containers.list()
+        for i in container_list:
+            names.append(i.name)
+        return  names
