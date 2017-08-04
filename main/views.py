@@ -36,5 +36,7 @@ def acc_logout(request):
 def logs(request,name):
     if request.method == 'GET':
         #获取到了容器的name 然后去lib中搜索name的容器然后进行日志打印
-
-        return name
+        b_logs = docker_initial().docker_logs(name)
+        logs_str = str(b_logs, encoding = "utf-8")
+        logs={'logs':logs_str}
+        return render(request, 'logs.html', logs)

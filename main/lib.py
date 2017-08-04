@@ -8,3 +8,7 @@ class docker_initial(object):
         for i in container_list:
             names.append(i.name)
         return  names
+    def docker_logs(self,container_name):
+        logs_container = self.client.containers.list(filters={'name':container_name})[0]
+        print('logs_container:',logs_container)
+        return logs_container.logs()
