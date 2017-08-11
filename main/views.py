@@ -17,22 +17,31 @@ def index_login(request):
         if user:
             print('authenticate sucess')
             login(request, user)
-            containers = docker_initial().docker_name()
-            return render(request, 'index.html', {'containers':containers})
+            return redirect('/dashboard')
         else:
             print(errors)
             errors = {'error': '用户名或者密码错误，请重新输入'}
             return render(request, 'login.html', errors)
 
-@login_required()
-def index(request):
-    return HttpResponse('111')
+@login_required(login_url='/login/')
+def dashboard(request):
+    if request.method == 'GET':
+        containers = docker_initial().docker_name()
+        print(containers)
+        containers_sum = len(containers)
+        containers_num= []
+        for i in range(1,containers_sum):
+            containers_num.append(i)
+        containers_num.append(containers_num[-1]+1)
+        containers_nums = dict(zip(containers_num, containers))
+        print(containers_nums)
+        return render(request, 'dashboard.html', {'containers_nums': containers_nums})
 
 def acc_logout(request):
     logout(request)
     return HttpResponseRedirect("/login")
 
-@login_required()
+@login_required(login_url='/login/')
 def logs(request,name):
     if request.method == 'GET':
         #获取到了容器的name 然后去lib中搜索name的容器然后进行日志打印

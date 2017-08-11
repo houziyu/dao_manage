@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body %}
+<table class="table table-bordered;table table-hover"style="margin-top: 10px">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Container Name</th>
+            <th>Image Name</th>
+            <th>Command</th>
+            <th>Created</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key,vale in containers_nums.items %}
+            <tr>
+{#                <th scope="row">{{ item.id }}</th>#}
+                <th scope="row">{{ key }}</th>
+                <td>{{ vale.name }}</td>
+{#                <td><a href="{% url 'logs' item %}">{{ item.ContainerName }}</a></td>#}
+                <td>{{ vale.image }}</td>
+{#                <td>{{ item.Command }}</td>#}
+{#                <td>{{ item.Created }}</td>#}
+                <td>{{ vale.status }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

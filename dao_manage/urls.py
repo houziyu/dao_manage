@@ -21,6 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/', views.index_login),
     url(r'^logout/', views.acc_logout,name='logout'),
-    url(r'^index/', views.index),
+    url(r'^dashboard/', views.dashboard,name='dashboard'),
     url(r'^logs/([A-Za-z]+)', views.logs,name='logs'),
 ]

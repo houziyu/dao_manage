@@ -126,7 +126,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'statics'),
     os.path.join(BASE_DIR,'uploads'),
                      )
-
+login_url = '/login/'
 # LOGIN_URL = "/account/login/"
 #
 # ALLOWED_HOSTS=['*']
