@@ -1,6 +1,7 @@
 from django.shortcuts import render,HttpResponse,redirect,HttpResponseRedirect
 from django.contrib.auth import authenticate,logout,login
 from django.core.urlresolvers import reverse
+from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
 from main.lib import docker_initial
 # Create your views here.
@@ -46,6 +47,6 @@ def logs(request,name):
     if request.method == 'GET':
         #获取到了容器的name 然后去lib中搜索name的容器然后进行日志打印
         b_logs = docker_initial().docker_logs(name)
-        logs_str = str(b_logs, encoding = "utf-8")
+        logs_str = mark_safe(str(b_logs, encoding = "utf-8").replace('\n','<br/>'))
         logs={'logs':logs_str}
         return render(request, 'logs.html', logs)

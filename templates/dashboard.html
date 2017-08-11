@@ -16,8 +16,7 @@
             <tr>
 {#                <th scope="row">{{ item.id }}</th>#}
                 <th scope="row">{{ key }}</th>
-                <td>{{ vale.name }}</td>
-{#                <td><a href="{% url 'logs' item %}">{{ item.ContainerName }}</a></td>#}
+                <td><a href="{% url 'logs' vale.name %}">{{ vale.name }}</a></td>
                 <td>{{ vale.image }}</td>
 {#                <td>{{ item.Command }}</td>#}
 {#                <td>{{ item.Created }}</td>#}
