@@ -15,7 +15,7 @@ def index_login(request):
         print(username,password)
         user = authenticate(username=username, password=password)
         if user:
-            print('authenticate sucess')
+            print('登录完成')
             login(request, user)
             return redirect('/dashboard')
         else:
@@ -27,7 +27,7 @@ def index_login(request):
 def dashboard(request):
     if request.method == 'GET':
         docker_container_all = docker_initial().docker_container_dictionary()
-        # print(docker_container_all)
+        print(docker_container_all)
         return render(request, 'dashboard.html', {'docker_container_all': docker_container_all})
 
 def acc_logout(request):
