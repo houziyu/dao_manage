@@ -1,6 +1,5 @@
 from django.shortcuts import render,HttpResponse,redirect,HttpResponseRedirect
 from django.contrib.auth import authenticate,logout,login
-from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
 from main.lib import docker_initial
@@ -27,26 +26,25 @@ def index_login(request):
 @login_required(login_url='/login/')
 def dashboard(request):
     if request.method == 'GET':
-        containers = docker_initial().docker_name()
-        print(containers)
-        containers_sum = len(containers)
-        containers_num= []
-        for i in range(1,containers_sum):
-            containers_num.append(i)
-        containers_num.append(containers_num[-1]+1)
-        containers_nums = dict(zip(containers_num, containers))
-        print(containers_nums)
-        return render(request, 'dashboard.html', {'containers_nums': containers_nums})
+        docker_container_all = docker_initial().docker_container_dictionary()
+        # print(docker_container_all)
+        return render(request, 'dashboard.html', {'docker_container_all': docker_container_all})
 
 def acc_logout(request):
     logout(request)
     return HttpResponseRedirect("/login")
 
 @login_required(login_url='/login/')
-def logs(request,name):
+def logs(request):
     if request.method == 'GET':
-        #获取到了容器的name 然后去lib中搜索name的容器然后进行日志打印
-        b_logs = docker_initial().docker_logs(name)
-        logs_str = mark_safe(str(b_logs, encoding = "utf-8").replace('\n','<br/>'))
+        hostname  = request.GET.get('hostname')
+        container_name = request.GET.get('container_name')
+        docker_container_all = docker_initial().docker_container_dictionary()
+        container_all = docker_container_all[hostname]
+        for i in container_all:
+            if i.name == container_name:
+                b_logs = i.logs(tail=10)
+        logs_str = mark_safe(str(b_logs, encoding="utf-8").replace('\n', '<br/>'))
         logs={'logs':logs_str}
         return render(request, 'logs.html', logs)
+        #获取到了容器的name 然后去lib中搜索name的容器然后进行日志打印

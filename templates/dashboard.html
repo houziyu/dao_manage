@@ -3,25 +3,28 @@
 <table class="table table-bordered;table table-hover"style="margin-top: 10px">
     <thead>
         <tr>
-            <th>#</th>
+            <th>Ordinal number</th>
+            <th>Host Name</th>
             <th>Container Name</th>
             <th>Image Name</th>
-            <th>Command</th>
-            <th>Created</th>
+            <th>Short Id</th>
             <th>Status</th>
         </tr>
     </thead>
     <tbody>
-        {% for key,vale in containers_nums.items %}
-            <tr>
-{#                <th scope="row">{{ item.id }}</th>#}
-                <th scope="row">{{ key }}</th>
-                <td><a href="{% url 'logs' vale.name %}">{{ vale.name }}</a></td>
-                <td>{{ vale.image }}</td>
-{#                <td>{{ item.Command }}</td>#}
-{#                <td>{{ item.Created }}</td>#}
-                <td>{{ vale.status }}</td>
-            </tr>
+        {% for hostname,vale in docker_container_all.items %}
+            {% for i in vale %}
+                <tr>
+                    <td>id</td>
+                    <td>{{ hostname }}</td>
+                    <td><a href="logs/?hostname={{ hostname }}&container_name={{ i.name }}">{{ i.name }}</a></td>
+{#                    <td><a href="{% url 'logs' i %}">{{ i.name }}</a></td>#}
+{#                    <td><a href="{% url 'logs' %}?name={{ i }}">{{ i.name }}</a></td>#}
+                    <td>{{ i.image }}</td>
+                    <td>{{ i.short_id}}</td>
+                    <td>{{ i.status }}</td>
+                </tr>
+            {% endfor %}
         {% endfor %}
     </tbody>
 </table>
