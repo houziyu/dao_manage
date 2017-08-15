@@ -14,3 +14,11 @@ class docker_initial(object):
             docker_container_all[i]= v.containers.list(all=True)
         print('docker_container_all:',docker_container_all)
         return docker_container_all
+    def docker_logs(self,hostname,container_name):
+        docker_container_all = docker_initial().docker_container_dictionary()
+        container_all = docker_container_all[hostname]
+        for i in container_all:
+            if i.name == container_name:
+                b_logs = i.logs(tail=dao_config.log_tail_line) #,since=datetime.datetime.now()
+                print('b_logs:',b_logs)
+                return b_logs

@@ -1,5 +1,6 @@
 from django.test import TestCase
+import datetime
 
-# Create your tests here.
-for i in range(1,10):
-    print(i)
+aa= datetime.datetime.now()
+print(type(aa))
+print(aa)

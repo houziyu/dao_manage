@@ -18,11 +18,11 @@ from django.contrib import admin
 from main import views
 
 urlpatterns = [
+    url(r'^$', views.index,name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', views.index_login),
     url(r'^logout/$', views.acc_logout,name='logout'),
     url(r'^dashboard/$', views.dashboard,name='dashboard'),
     url(r'^dashboard/logs/$', views.logs, name='logs'),
-    # url(r'^logs/([A-Za-z]+)', views.logs,name='logs'),
     # url(r'^logs/$', views.logs, name='logs'),
 ]

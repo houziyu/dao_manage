@@ -1,4 +1,14 @@
 {% extends 'base.html' %}
+{% block extra-head-resources %}
+<script >
+$(function(){
+    var len = $('table tr').length;
+    for(var i = 1;i<len;i++){
+        $('table tr:eq('+i+') td:first').text(i);
+    }
+});
+</script>
+{% endblock %}
 {% block body %}
 <table class="table table-bordered;table table-hover"style="margin-top: 10px">
     <thead>
@@ -18,8 +28,6 @@
                     <td>id</td>
                     <td>{{ hostname }}</td>
                     <td><a href="logs/?hostname={{ hostname }}&container_name={{ i.name }}">{{ i.name }}</a></td>
-{#                    <td><a href="{% url 'logs' i %}">{{ i.name }}</a></td>#}
-{#                    <td><a href="{% url 'logs' %}?name={{ i }}">{{ i.name }}</a></td>#}
                     <td>{{ i.image }}</td>
                     <td>{{ i.short_id}}</td>
                     <td>{{ i.status }}</td>

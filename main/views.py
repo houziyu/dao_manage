@@ -1,10 +1,12 @@
 from django.shortcuts import render,HttpResponse,redirect,HttpResponseRedirect
 from django.contrib.auth import authenticate,logout,login
 from django.utils.safestring import mark_safe
-from config import dao_config
 from django.contrib.auth.decorators import login_required
 from main.lib import docker_initial
 # Create your views here.
+
+def index(request):
+    return redirect('/login')
 
 def index_login(request):
     errors = {}
@@ -40,11 +42,7 @@ def logs(request):
     if request.method == 'GET':
         hostname  = request.GET.get('hostname')
         container_name = request.GET.get('container_name')
-        docker_container_all = docker_initial().docker_container_dictionary()
-        container_all = docker_container_all[hostname]
-        for i in container_all:
-            if i.name == container_name:
-                b_logs = i.logs(tail=dao_config.log_tail_line)
+        b_logs = docker_initial().docker_logs(hostname,container_name)
         logs_str = mark_safe(str(b_logs, encoding="utf-8").replace('\n', '<br/>'))
         logs={'logs':logs_str}
         return render(request, 'logs.html', logs)
