@@ -40,10 +40,12 @@ def acc_logout(request):
 @login_required(login_url='/login/')
 def logs(request):
     if request.method == 'GET':
-        hostname  = request.GET.get('hostname')
+        log_type = request.GET.get('type')
+        hostname = request.GET.get('hostname')
         container_name = request.GET.get('container_name')
-        b_logs = docker_initial().docker_logs(hostname,container_name)
+        b_logs = docker_initial().docker_logs(hostname,container_name,log_type)
         logs_str = mark_safe(str(b_logs, encoding="utf-8").replace('\n', '<br/>'))
-        logs={'logs':logs_str}
-        return render(request, 'logs.html', logs)
+        print(logs_str)
+        info={'logs':logs_str,'hostname':hostname,'container_name':container_name}
+        return render(request, 'logs.html', info)
         #获取到了容器的name 然后去lib中搜索name的容器然后进行日志打印

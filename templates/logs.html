@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 {% block body %}
-    <div>
-        <span>{{ logs }}</span>
+    <div class="row" style="height: 40px;background: #d9edf7;">
+        <span style="border: 1px solid red">hostanme:{{ hostname }}|container_name:{{ container_name }}</span>
+        <input name="log_info" type="button" onclick="show_log_info();" value="查看log_info">
+        <a href="/dashboard/logs/?hostname={{ hostname }}&container_name={{ container_name }}&type=error"><input name="log_error" type="button" onclick="show_log_error();" value="查看log_error"></a>
     </div>
+    <div class="row" id="log_info_body">
+        {{ logs }}
+    </div>
+    <script>
+    function show_log_info() {
+        document.getElementById('log_info_body').style.display='';
+    }
+    function show_log_error() {
+        document.getElementById('log_info_body').style.display='none';
+        var div = document.createElement('div').id='log_error_body';
+        document.getElementById('log_error_body').className='row';
+    }
+    </script>
 {% endblock %}

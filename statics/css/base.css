@@ -1,0 +1,23 @@
+.nav_head{
+    background-color:#f8f8f8;
+    min-height: 50px;
+    position:relative;
+    border-bottom:1px solid #e7e7e7;
+}
+.logout{
+    min-height:50px;
+}
+.left_content_nav{
+    z-index:1;
+    position:absolute;
+    width: 250px;
+    margin-top: 50px;
+}
+.content_body{
+    position:inherit;
+    margin:0 0 0 250px;
+    padding:0 30px;
+    border-left:1px solid #e7e7e7;
+    height:100%;
+    background-color:white;
+}
