@@ -27,5 +27,5 @@ class docker_initial(object):
             container_all = docker_container_all[hostname]
             for i in container_all:
                 if i.name == container_name:
-                    b_logs = i.logs(tail=dao_config.log_tail_line,stdout=False)  # ,since=datetime.datetime.now()
+                    b_logs = i.logs(tail=dao_config.log_error_line,stdout=False)  # ,since=datetime.datetime.now() tail=dao_config.log_tail_line,
                     return b_logs
