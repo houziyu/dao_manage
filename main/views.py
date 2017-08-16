@@ -40,9 +40,12 @@ def acc_logout(request):
 @login_required(login_url='/login/')
 def logs(request):
     if request.method == 'GET':
+        find_time=''
+        if request.GET.get('find_time'):
+            find_time = request.GET.get('find_time')
         hostname  = request.GET.get('hostname')
         container_name = request.GET.get('container_name')
-        b_logs = docker_initial().docker_logs(hostname,container_name)
+        b_logs = docker_initial().docker_logs(hostname,container_name,find_time)
         logs_str = mark_safe(str(b_logs, encoding="utf-8").replace('\n', '<br/>'))
         info={'logs':logs_str,'hostname':hostname,'container_name':container_name}
         return render(request, 'logs.html', info)

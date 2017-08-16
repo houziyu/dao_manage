@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% block body %}
-    <div class="row" style="height: 40px;background: #d9edf7;">
-        <span style="border: 1px solid red">hostanme:{{ hostname }}|container_name:{{ container_name }}</span>
+    <div class="row" style="height: 40px;background: #d9edf7;" xmlns="http://www.w3.org/1999/html">
+        <form action="" method="get">
+            <span style="border: 1px solid red">hostanme:{{ hostname }}|container_name:{{ container_name }}</span>
+            <input type="hidden" name="hostname" value="{{ hostname }}">
+            <input type="hidden" name="container_name" value="{{ container_name }}">
+            <input name="find_time" type="number" placeholder="请输入分钟" style="height: 30px;width: 100px;border: 1px solid red">
+            <span style="border: 1px solid red"><input type="submit" value="查找"/></span>
+        </form>
     </div>
     <div class="row" >
         {{ logs }}
