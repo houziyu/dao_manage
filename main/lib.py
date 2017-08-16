@@ -1,5 +1,7 @@
 import docker
 from config import dao_config
+import datetime
+
 class docker_initial(object):
     def __init__(self):
         host_list = dao_config.host_list
@@ -14,18 +16,12 @@ class docker_initial(object):
             docker_container_all[i]= v.containers.list(all=True)
         print('docker_container_all:',docker_container_all)
         return docker_container_all
-    def docker_logs(self,hostname,container_name,log_type):
-        if log_type == 'info':
-            docker_container_all = docker_initial().docker_container_dictionary()
-            container_all = docker_container_all[hostname]
-            for i in container_all:
-                if i.name == container_name:
-                    b_logs = i.logs(tail=dao_config.log_tail_line) #,since=datetime.datetime.now()
-                    return b_logs
-        elif log_type == 'error':
-            docker_container_all = docker_initial().docker_container_dictionary()
-            container_all = docker_container_all[hostname]
-            for i in container_all:
-                if i.name == container_name:
-                    b_logs = i.logs(tail=dao_config.log_error_line,stdout=False)  # ,since=datetime.datetime.now() tail=dao_config.log_tail_line,
-                    return b_logs
+    def docker_logs(self,hostname,container_name):
+        aa= datetime.datetime.now() + datetime.timedelta(hours=-2)
+        docker_container_all = docker_initial().docker_container_dictionary()
+        container_all = docker_container_all[hostname]
+        for i in container_all:
+            if i.name == container_name:
+                # b_logs = i.logs(tail=dao_config.log_tail_line) #,since=datetime.datetime.now()
+                b_logs = i.logs(timestamps=True,since=aa)
+                return b_logs
