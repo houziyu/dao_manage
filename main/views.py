@@ -46,7 +46,8 @@ def logs(request):
         hostname  = request.GET.get('hostname')
         container_name = request.GET.get('container_name')
         b_logs = docker_initial().docker_logs(hostname,container_name,find_time)
-        logs_str = mark_safe(str(b_logs, encoding="utf-8").replace('\n', '<br/>'))
+        # logs_str = mark_safe(str(b_logs, encoding="utf-8").replace('\n', '<br/>'))
+        logs_str = mark_safe(str(b_logs, encoding="utf-8"))
         # print(str(b_logs, encoding="utf-8").replace('\n', '<br/>'))
         info={'logs':logs_str,'hostname':hostname,'container_name':container_name}
         return render(request, 'logs.html', info)
