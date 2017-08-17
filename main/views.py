@@ -41,10 +41,10 @@ def acc_logout(request):
 def logs(request):
     if request.method == 'GET':
         find_time=''
+        hostname = request.GET.get('hostname')
+        container_name = request.GET.get('container_name')
         if request.GET.get('find_time'):
             find_time = request.GET.get('find_time')
-        hostname  = request.GET.get('hostname')
-        container_name = request.GET.get('container_name')
         b_logs = docker_initial().docker_logs(hostname,container_name,find_time)
         # logs_str = mark_safe(str(b_logs, encoding="utf-8").replace('\n', '<br/>'))
         logs_str = mark_safe(str(b_logs, encoding="utf-8"))
