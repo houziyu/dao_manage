@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_crontab',
     'main',
 ]
 
@@ -101,7 +102,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+CRONJOBS = [
+    ('1 1 1 * *', 'main.cron_download_log.cron_download_log')
+]
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
