@@ -7,34 +7,25 @@
     {% block extra-head-resources %}{% endblock %}
 </head>
 
-<body style="background-color: gainsboro">
-    <div id="wrapper">
-    <nav class="nav_head">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'dashboard' %}">clx后台运维平台</a>
+<body style="background-color: gainsboro;margin: 0;padding: 0">
+<div id="wrapper" style="height: 100%;width: 100%;position: absolute">
+    <div style="position: relative;height: 8%;width: 100%;background: #f8f8f8;border-bottom: 1px solid #e7e7e7">
+        <div style="float: left">
+            <a style="float: left;height: 8%;padding: 15px 15px;font-size: 18px;line-height: 20px;text-decoration: none" href="{% url 'dashboard' %}">clx后台运维平台</a>
         </div>
-        <ul class="nav navbar-top-links navbar-right" style="margin-right: 0;">
-            <li class="dropdown">
-                <a href="{% url 'logout' %}" class="logout">logout</a>
-            </li>
-        </ul>
-        <div class="navbar-default left_content_nav" role="navigation">
-            <div class="sidebar-nav">
-                <ul class="nav" id="side-menu">
-                    <li>
-                        <a href="{% url 'dashboard' %}">docker仪表盘</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="content_body">
-        <div class="row">
-             {% block body %}
-             {% endblock %}
+        <div style="float: right" >
+            <a  style="float: right;height: 46px;padding: 15px 15px;display: block;text-decoration: none" href="{% url 'logout' %}">logout</a>
         </div>
     </div>
+    <div style="position: absolute;width: 15%;height: 46px;border-right: 1px solid #e7e7e7;border-bottom: 1px solid #e7e7e7;">
+        <a style="float: left;display: block;background: white;height: 100%;width: 100%;padding: 10px 40px; text-decoration: none" href="{% url 'dashboard' %}">docker仪表盘</a>
+    </div>
+    <div style="position: absolute;float: left;width: 85%;height: 92%;margin-left: 15%;background: white">
+     {% block body %}
+     {% endblock %}
+    </div>
 </div>
+
 
   {% block bottom-js %}{% endblock %}
 

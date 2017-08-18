@@ -30,5 +30,5 @@ class docker_initial(object):
         else:
             for i in container_all:
                 if i.name == container_name:
-                    b_logs = i.logs(tail=300) #,since=datetime.datetime.now()
+                    b_logs = i.logs(tail=dao_config.log_tail_line) #,since=datetime.datetime.now()
                     return b_logs
