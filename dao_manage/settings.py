@@ -103,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 CRONJOBS = [
-    ('1 1 1 * *', 'main.cron_download_log.cron_download_log')
+    ('*/5 * * * *', 'main.cron_download_log.cron_download_log')
 ]
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
