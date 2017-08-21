@@ -77,4 +77,4 @@ def cron_download_log(request):
                     log_file.write(aaaaa_date)
                     log_file.write(log_str)
                     log_file.close()
-                    return HttpResponse('wancheng')
+    return HttpResponse('wancheng')
