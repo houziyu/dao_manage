@@ -1,24 +1,22 @@
-from .lib import docker_initial
+from main.lib import docker_initial
+import datetime
+from config import dao_config
 def cron_download_log():
     docker_container_all = docker_initial().docker_container_dictionary()
     for i in docker_container_all:
         hostname= i
         for y in docker_container_all[i]:
-            if y.name == "job-service-8500":
-                log_init = y.get_archive('/logs/job-service/info/log-info-2017-08-20.0.log')
-                log_str = str(log_init[0].data, encoding="utf-8")
-                print(log_str)
-            # print(hostname,y.name,)
-    # datetime_now = datetime.datetime.now().strftime('%Y-%m-%d')
-    # os.mkdir('./log/')
-    # for i in docker_container_all:
-    #     hostname = i
-    #     for y in docker_container_all[i]:
-    #         log_name = hostname+'_'+y.name+'_'+datetime_now+'.log'
-    #         os.mkdir('./log/'+y.name)
-    #         logs_file = open('./log/'+y.name+'/'+log_name,'a+')
-    #         log_str = str(y.logs(),encoding="utf-8")
-    #         logs_file.write(log_str)
-    #         logs_file.close()
-if __name__ == '__main__':
-    cron_download_log()
+            service_name = y.name.split('-')[0]
+            if y.status == 'running':
+                if service_name in dao_config.service_name_list:
+                    aaaaa_date = str(datetime.datetime.now())
+                    #时间测试
+                    log_date = str(datetime.date.today() + datetime.timedelta(days=-1, hours=+8))
+                    service_log_path = '/logs/' + service_name + '-service' + '/info/log-info-' + log_date + '.0.log'
+                    log_init = y.get_archive(service_log_path)
+                    log_str = str(log_init[0].data, encoding="utf-8")
+                    log_local_name = '/log_everyone_bak/' + service_name + '-service/' + hostname + '-' + service_name + '-service' + '-' + log_date + '.log'
+                    log_file = open(log_local_name, 'a+')
+                    log_file.write(aaaaa_date)
+                    log_file.write(log_str)
+                    log_file.close()
