@@ -24,14 +24,13 @@ for i in docker_container_all:
                 log_date = str(datetime.date.today() + datetime.timedelta(days=-1, hours=+8))
                 service_log_path = '/logs/' + service_name + '-service' + '/info/log-info-' + log_date + '.0.log'
                 log_init = y.get_archive(service_log_path)
+                print(dir(log_init))
                 log_str = str(log_init[0].data, encoding="utf-8")
                 log_local_name = '/log_everyone_bak/' + service_name + '-service/' + hostname + '-' + service_name + '-service' + '-' + log_date + '.log'
                 log_file = open(log_local_name,'a+')
                 log_file.write(aaaaa_date)
                 log_file.write(log_str)
                 log_file.close()
-                log_init.close()
-
 
 
 
