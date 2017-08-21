@@ -5,7 +5,7 @@ import datetime
 
 def cron_download_log():
     service_name_list = ['manage', 'job', 'trace', 'payment', 'message', 'user', 'order']
-    host_list = ['docker_master', 'docker_node1', 'docker_node2']
+    host_list = ['docker_dev2', 'docker_dev3']
     docker_all = {}
     for i in host_list:
         docker_singleton = docker.DockerClient(base_url='tcp://%s:2375' % i)
