@@ -24,7 +24,6 @@ urlpatterns = [
     url(r'^logout/$', views.acc_logout,name='logout'),
     url(r'^dashboard/$', views.dashboard,name='dashboard'),
     url(r'^dashboard/logs/$', views.logs, name='logs'),
-    url(r'^aaa/$', views.cron_download_log, name='cron_download_log'),
     # url(r'^dashboard/error_logs/$', views.error_logs, name='error_logs'),
     # url(r'^logs/$', views.logs, name='logs'),
 ]
