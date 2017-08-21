@@ -3,37 +3,35 @@ import docker
 import datetime
 
 
-def cron_download_log():
-    service_name_list = ['manage', 'job', 'trace', 'payment', 'message', 'user', 'order']
-    host_list = ['docker_dev2', 'docker_dev3']
-    docker_all = {}
-    for i in host_list:
-        docker_singleton = docker.DockerClient(base_url='tcp://%s:2375' % i)
-        docker_all[i] = docker_singleton
-    docker_container_all = {}
-    for i, v in docker_all.items():
-        docker_container_all[i] = v.containers.list(all=True)
-    print('docker_container_all:', docker_container_all)
-    for i in docker_container_all:
-        hostname= i
-        for y in docker_container_all[i]:
-            service_name = y.name.split('-')[0]
-            if y.status == 'running':
-                if service_name in service_name_list:
-                    aaaaa_date = datetime.datetime.now()
-                    #时间测试
-                    log_date = str(datetime.date.today() + datetime.timedelta(days=-1, hours=+8))
-                    service_log_path = '/logs/' + service_name + '-service' + '/info/log-info-' + log_date + '.0.log'
-                    log_init = y.get_archive(service_log_path)
-                    log_str = str(log_init[0].data, encoding="utf-8")
-                    log_local_name = '/log_everyone_bak/' + service_name + '-service/' + hostname + '-' + service_name + '-service' + '-' + log_date + '.log'
-                    log_file = open(log_local_name,'a+')
-                    log_file.write(aaaaa_date)
-                    log_file.write(log_str)
-                    log_file.close()
-                    log_init.close()
-if __name__ == '__main__':
-    cron_download_log()
+service_name_list = ['manage', 'job', 'trace', 'payment', 'message', 'user', 'order']
+host_list = ['docker_dev2', 'docker_dev3']
+docker_all = {}
+for i in host_list:
+    docker_singleton = docker.DockerClient(base_url='tcp://%s:2375' % i)
+    docker_all[i] = docker_singleton
+docker_container_all = {}
+for i, v in docker_all.items():
+    docker_container_all[i] = v.containers.list(all=True)
+print('docker_container_all:', docker_container_all)
+for i in docker_container_all:
+    hostname= i
+    for y in docker_container_all[i]:
+        service_name = y.name.split('-')[0]
+        if y.status == 'running':
+            if service_name in service_name_list:
+                aaaaa_date = str(datetime.datetime.now())
+                #时间测试
+                log_date = str(datetime.date.today() + datetime.timedelta(days=-1, hours=+8))
+                service_log_path = '/logs/' + service_name + '-service' + '/info/log-info-' + log_date + '.0.log'
+                log_init = y.get_archive(service_log_path)
+                log_str = str(log_init[0].data, encoding="utf-8")
+                log_local_name = '/log_everyone_bak/' + service_name + '-service/' + hostname + '-' + service_name + '-service' + '-' + log_date + '.log'
+                log_file = open(log_local_name,'a+')
+                log_file.write(aaaaa_date)
+                log_file.write(log_str)
+                log_file.close()
+                log_init.close()
+
 
 
 
