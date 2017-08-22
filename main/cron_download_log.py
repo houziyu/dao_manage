@@ -9,14 +9,12 @@ def cron_download_log():
             service_name = y.name.split('-')[0]
             if y.status == 'running':
                 if service_name in dao_config.service_name_list:
-                    aaaaa_date = str(datetime.datetime.now())
-                    #时间测试
-                    log_date = str(datetime.date.today() + datetime.timedelta(days=-1, hours=+8))
+                    log_date = str(datetime.date.today() + datetime.timedelta(hours=-16))
                     service_log_path = '/logs/' + service_name + '-service' + '/info/log-info-' + log_date + '.0.log'
                     log_init = y.get_archive(service_log_path)
                     log_str = str(log_init[0].data, encoding="utf-8")
                     log_local_name = '/log_everyone_bak/' + service_name + '-service/' + hostname + '-' + service_name + '-service' + '-' + log_date + '.log'
                     log_file = open(log_local_name, 'a+')
-                    log_file.write(aaaaa_date)
+                    log_file.write('执行时间:'+log_date)
                     log_file.write(log_str)
                     log_file.close()
