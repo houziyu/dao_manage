@@ -3,8 +3,6 @@ from django.contrib.auth import authenticate,logout,login
 from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
 from main.lib import docker_initial
-from config import dao_config
-import datetime
 # Create your views here.
 
 def index(request):
@@ -48,9 +46,7 @@ def logs(request):
         if request.GET.get('find_time'):
             find_time = request.GET.get('find_time')
         b_logs = docker_initial().docker_logs(hostname,container_name,find_time)
-        # logs_str = mark_safe(str(b_logs, encoding="utf-8").replace('\n', '<br/>'))
         logs_str = mark_safe(str(b_logs, encoding="utf-8"))
-        # print(str(b_logs, encoding="utf-8").replace('\n', '<br/>'))
         info={'logs':logs_str,'hostname':hostname,'container_name':container_name}
         return render(request, 'logs.html', info)
         #获取到了容器的name 然后去lib中搜索name的容器然后进行日志打印
