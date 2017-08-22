@@ -72,3 +72,4 @@ def update_log(request):
                     log_file.write('执行时间:' + date_now)
                     log_file.write(log_str)
                     log_file.close()
+    return HttpResponse('完成')
