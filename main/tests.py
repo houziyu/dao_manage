@@ -32,10 +32,10 @@
 #                 log_file.write(log_str)
 #                 log_file.close()
 import datetime
-log_date = str(datetime.datetime.now() + datetime.timedelta(hours=-24))
-print(log_date)
-
-
+service_name = 'order'
+log_date = (datetime.datetime.now() + datetime.timedelta(hours=-16)).strftime("%Y-%m-%d")
+service_log_path = '/logs/' + service_name + '-service' + '/info/log-info-' + log_date + '.0.log'
+print(service_log_path)
 
 
 
