@@ -1,23 +1,56 @@
-.nav_head{
-    background-color:#f8f8f8;
-    min-height: 50px;
-    position:relative;
-    border-bottom:1px solid #e7e7e7;
+.body_all{
+    background-color: gainsboro;
+    margin: 0;
+    padding: 0;
 }
-.logout{
-    min-height:50px;
+.big_dev{
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }
-.left_content_nav{
-    z-index:1;
-    position:absolute;
-    width: 250px;
-    margin-top: 50px;
+.head_dev{
+    position: relative;
+    height: 8%;
+    width: 100%;
+    background: #f8f8f8;
+    border-bottom: 1px solid #e7e7e7;
 }
-.content_body{
-    position:inherit;
-    margin:0 0 0 250px;
-    padding:0 30px;
-    border-left:1px solid #e7e7e7;
-    height:100%;
-    background-color:white;
+.head_company_name{
+    float: left;
+    height: 8%;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    text-decoration: none;
+}
+.right_logout{
+    float: right;
+    height: 46px;
+    padding: 15px 15px;
+    display: block;
+    text-decoration: none;
+}
+.left_div{
+    position: absolute;
+    width: 15%;
+    height: 46px;
+    border-right: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+.left_a{
+    float: left;
+    display: block;
+    background: white;
+    height: 100%;
+    width: 100%;
+    padding: 10px 40px;
+    text-decoration: none;
+}
+.content_dir{
+    position: absolute;
+    float: left;
+    width: 85%;
+    height: 92%;
+    margin-left: 15%;
+    background: white;
 }
