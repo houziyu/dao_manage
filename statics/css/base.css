@@ -21,14 +21,12 @@
     padding: 15px 15px;
     font-size: 18px;
     line-height: 20px;
-    text-decoration: none;
 }
 .right_logout{
     float: right;
     height: 46px;
     padding: 15px 15px;
     display: block;
-    text-decoration: none;
 }
 .left_div{
     position: absolute;
@@ -44,7 +42,6 @@
     height: 100%;
     width: 100%;
     padding: 10px 40px;
-    text-decoration: none;
 }
 .content_dir{
     position: absolute;

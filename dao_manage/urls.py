@@ -24,6 +24,6 @@ urlpatterns = [
     url(r'^logout/$', views.acc_logout,name='logout'),
     url(r'^dashboard/$', views.dashboard,name='dashboard'),
     url(r'^dashboard/logs/$', views.logs, name='logs'),
-    # url(r'^dashboard/error_logs/$', views.error_logs, name='error_logs'),
+    url(r'^update_log/$', views.update_log, name='update_log'),
     # url(r'^logs/$', views.logs, name='logs'),
 ]

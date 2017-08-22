@@ -5,22 +5,26 @@
     <link href="/static/css/base.css" rel="stylesheet">
     <script type="text/JavaScript" src="/static/js/jquery.min.js"></script>
     {% block extra-head-resources %}{% endblock %}
+
 </head>
 
-<body style="background-color: gainsboro;margin: 0;padding: 0">
-<div id="wrapper" style="height: 100%;width: 100%;position: absolute">
-    <div style="position: relative;height: 8%;width: 100%;background: #f8f8f8;border-bottom: 1px solid #e7e7e7">
+<body class="body_all">
+<div id="wrapper" class="big_dev">
+    <div class="head_dev">
         <div style="float: left">
-            <a style="float: left;height: 8%;padding: 15px 15px;font-size: 18px;line-height: 20px;text-decoration: none" href="{% url 'dashboard' %}">clx后台运维平台</a>
+            <a class="head_company_name" style="text-decoration: none" href="{% url 'dashboard' %}">clx后台运维平台</a>
         </div>
         <div style="float: right" >
-            <a  style="float: right;height: 46px;padding: 15px 15px;display: block;text-decoration: none" href="{% url 'logout' %}">logout</a>
+            <a class="right_logout" style="text-decoration: none" href="{% url 'logout' %}">logout</a>
+        </div>
+        <div style="float: right" >
+            <a class="right_logout" style="text-decoration: none" href="{% url 'update_log' %}">更新代码前备份日志</a>
         </div>
     </div>
-    <div style="position: absolute;width: 15%;height: 46px;border-right: 1px solid #e7e7e7;border-bottom: 1px solid #e7e7e7;">
-        <a style="float: left;display: block;background: white;height: 100%;width: 100%;padding: 10px 40px; text-decoration: none" href="{% url 'dashboard' %}">docker仪表盘</a>
+    <div class="left_div">
+        <a class="left_a" style="text-decoration: none" href="{% url 'dashboard' %}">docker仪表盘</a>
     </div>
-    <div style="position: absolute;float: left;width: 85%;height: 92%;margin-left: 15%;background: white">
+    <div class="content_dir">
      {% block body %}
      {% endblock %}
     </div>

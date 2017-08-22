@@ -31,11 +31,11 @@
 #                 log_file.write(aaaaa_date)
 #                 log_file.write(log_str)
 #                 log_file.close()
-import datetime
-service_name = 'order'
-log_date = (datetime.datetime.now() + datetime.timedelta(hours=-16)).strftime("%Y-%m-%d")
-service_log_path = '/logs/' + service_name + '-service' + '/info/log-info-' + log_date + '.0.log'
-print(service_log_path)
+# import datetime
+# service_name = 'order'
+# log_date = (datetime.datetime.now() + datetime.timedelta(hours=-16)).strftime("%Y-%m-%d")
+# service_log_path = '/logs/' + service_name + '-service' + '/info/log-info-' + log_date + '.0.log'
+# print(service_log_path)
 
 
 
