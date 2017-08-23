@@ -38,7 +38,6 @@ class docker_initial(object):
     def docker_update_log(self,all_log=None,hostname=None,container_name=None):
         if all_log:
             print(all_log)
-            return_results={}
             docker_container_all = docker_initial().docker_container_dictionary()
             for i in docker_container_all:
                 hostname = i
