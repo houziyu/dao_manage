@@ -1,6 +1,9 @@
 
 
+aa = {'a':['11','22'],'b':['22','33']}
 
+zzz = aa['a']
+print(zzz)
 
 # import docker
 # import datetime

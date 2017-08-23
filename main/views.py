@@ -60,33 +60,16 @@ def update_log(request):
         hostname = request.GET.get('hostname')
         container_name = request.GET.get('container_name')
         if hostname and container_name:
-            print(hostname, container_name)
+            docker_download_log_path = docker_initial().docker_update_log(hostname,container_name)
+            return render(request, 'return_index.html', docker_download_log_path)
         elif all_log:
-            docker_container_all = docker_initial().docker_update_log(all_log)
-            print('docker_container_all:',docker_container_all)
-            if docker_container_all:
-                return render(request, 'return_index.html',docker_container_all)
+            docker_log_bak = docker_initial().docker_update_log(all_log)
+            if docker_log_bak:
+                return render(request, 'return_index.html',docker_log_bak)
         else:
-            print('传递参数有误')
+            errors = {'return_results':'参数传递有错误！请检查!'}
+            return render(request, 'return_index.html', errors)
     return HttpResponse('aaa')
-    # docker_container_all = docker_initial().docker_container_dictionary()
-    # for i in docker_container_all:
-    #     hostname = i
-    #     for y in docker_container_all[i]:
-    #         service_name = y.name.split('-')[0]
-    #         if y.status == 'running':
-    #             if service_name in dao_config.service_name_list:
-    #                 log_date = (datetime.datetime.now() + datetime.timedelta(hours=+8)).strftime("%Y-%m-%d")
-    #                 service_log_path = '/logs/' + service_name + '-service/log_info.log'
-    #                 log_init = y.get_archive(service_log_path)
-    #                 log_str = str(log_init[0].data, encoding="utf-8")
-    #                 log_local_name = '/log_everyone_bak/' + service_name + '-service/update/'+'update'+ hostname + '-' + service_name + '-service' + '-' + log_date + '.log'
-    #                 log_file = open(log_local_name, 'a+')
-    #                 date_now = str(datetime.datetime.now())
-    #                 log_file.write('执行时间:' + date_now)
-    #                 log_file.write(log_str)
-    #                 log_file.close()
-    # return render(request, 'return_index.html')
 
 @login_required(login_url='/login/')
 def download_log(request):
