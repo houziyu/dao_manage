@@ -96,30 +96,21 @@ def readFile(filename,chunk_size=512):
 
 @login_required(login_url='/login/')
 def dir_log(request):
-    service_name_list = dao_config.service_name_list
-    service_now_list = []
-    service_name_all = []
-    log_path = dao_config.log_dir_master
-    for i in service_name_list:
-        service_name_path = log_path + i + '-service'
-        service_name_service = i + '-service'
-        service_name_all.append(service_name_service)
-        service_now_list.append(service_name_path)
-    service_now = {'service_now':service_name_all}
-    return render(request, 'dir_log.html', service_now)
-    # if request.method == 'GET':
-    #     log_path = request.GET.get('log_path')
-    #     log_name = request.GET.get('log_name')
-    #     file_dir_list = []
-    #     log_dir_master= dao_config.log_dir_master
-    #     file_dir_start = os.listdir(log_dir_master)
-    #     for i in file_dir_start:
-    #         log_dir_master_1 = log_dir_master + i
-    #         file_dir_list.append(log_dir_master_1)
-    #     file_fir_dictionary = {'file_dir_list': file_dir_list,'service_list':file_dir_start}
-    #     print(file_fir_dictionary)
-    #     return render(request, 'dir_log.html', file_fir_dictionary)
-
-
-
-
+    if request.method == 'GET':
+        service_name_list = dao_config.service_name_list
+        service_now_list = []
+        service_name_all = []
+        log_path = dao_config.log_dir_master
+        for i in service_name_list:
+            service_name_path = log_path + i + '-service'
+            service_name_service = i + '-service'
+            service_name_all.append(service_name_service)
+            service_now_list.append(service_name_path)
+        log_path = request.GET.get('find_name')
+        if log_path:
+            for i in service_now_list:
+                if log_path in i:
+                    print(log_path)
+        else:
+            service_now = {'service_now':service_name_all}
+            return render(request, 'dir_log.html', service_now)

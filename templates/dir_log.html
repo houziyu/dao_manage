@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
     {% for i in service_now %}
-        <p><a>{{ i }}</a></p>
+        <p><a href="/dir_log/?find_name={{ i }}">{{ i }}</a></p>
     {% endfor %}
 {% endblock %}
 
