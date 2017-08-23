@@ -60,10 +60,10 @@ def update_log(request):
         hostname = request.GET.get('hostname')
         container_name = request.GET.get('container_name')
         if hostname and container_name:
-            docker_download_log_path = docker_initial().docker_update_log(hostname,container_name)
+            docker_download_log_path = docker_initial().docker_update_log(hostname=hostname,container_name=container_name)
             return render(request, 'return_index.html', docker_download_log_path)
         elif all_log:
-            docker_log_bak = docker_initial().docker_update_log(all_log)
+            docker_log_bak = docker_initial().docker_update_log(all_log=all_log)
             if docker_log_bak:
                 return render(request, 'return_index.html',docker_log_bak)
         else:
