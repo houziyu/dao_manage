@@ -58,7 +58,7 @@ class docker_initial(object):
             return_results = {'return_results': '!备份成功!返回主页!'}
             return return_results
         elif hostname and container_name:
-            print('别她妈跑错地方了')
+            print('别跑错地方了')
             docker_container_all = docker_initial().docker_container_dictionary()
             docker_container_list = docker_container_all[hostname]
             print(docker_container_list)
@@ -72,12 +72,13 @@ class docker_initial(object):
                             print(service_name,log_date,service_log_path)
                             log_init = i.get_archive(service_log_path)
                             log_str = str(log_init[0].data, encoding="utf-8")
-                            log_local_name = '/log_everyone_bak/tmp/' + hostname + service_name + log_date + '.log'
+                            log_name = hostname + '-' +service_name +'-'+ log_date + '.log'
+                            log_local_name = '/log_everyone_bak/tmp/' + log_name
                             print(log_local_name)
                             log_file = open(log_local_name, 'a+')
                             date_now = str(datetime.datetime.now())
                             log_file.write('执行时间:' + date_now)
                             log_file.write(log_str)
                             log_file.close()
-                            return_results = {'return_results': log_local_name}
+                            return_results = {'return_results': log_local_name,'log_name':log_name}
                             return return_results

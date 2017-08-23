@@ -69,8 +69,11 @@ def update_log(request):
         else:
             errors = {'return_results':'参数传递有错误！请检查!'}
             return render(request, 'return_index.html', errors)
-    return HttpResponse('aaa')
+    return HttpResponse('出错了~')
 
 @login_required(login_url='/login/')
 def download_log(request):
-    pass
+    if request.method == 'GET':
+        log_path = request.GET.get('log_path')
+        log_name = request.GET.get('log_name')
+        print('log_path:',log_path,'log_name:',log_name)
