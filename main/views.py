@@ -3,8 +3,7 @@ from django.contrib.auth import authenticate,logout,login
 from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
 from main.lib import docker_initial
-from config import dao_config
-import datetime
+from django.http import StreamingHttpResponse
 # Create your views here.
 
 def index(request):
@@ -77,3 +76,18 @@ def download_log(request):
         log_path = request.GET.get('log_path')
         log_name = request.GET.get('log_name')
         print('log_path:',log_path,'log_name:',log_name)
+        the_file_name = log_name  # 显示在弹出对话框中的默认的下载文件名
+        filename = log_path  # 要下载的文件路径
+        response = StreamingHttpResponse(readFile(filename))
+        response['Content-Type'] = 'application/octet-stream'
+        response['Content-Disposition'] = 'attachment;filename="{0}"'.format(the_file_name)
+        return response
+
+def readFile(filename,chunk_size=512):
+    with open(filename,'rb') as f:
+        while True:
+            c=f.read(chunk_size)
+            if c:
+                yield c
+            else:
+                break
