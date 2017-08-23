@@ -59,6 +59,7 @@ class docker_initial(object):
         elif hostname and container_name:
             docker_container_all = docker_initial().docker_container_dictionary()
             docker_container_list = docker_container_all[hostname]
+            print(docker_container_list)
             for i in docker_container_list:
                 if i.name == container_name:
                     service_name = i.name.split('-')[0]
@@ -66,9 +67,11 @@ class docker_initial(object):
                         if service_name in dao_config.service_name_list:
                             log_date = (datetime.datetime.now() + datetime.timedelta(hours=+8)).strftime("%Y-%m-%d-%H:%M:%S")
                             service_log_path = '/logs/' + service_name + '-service/log_info.log'
+                            print(service_name,log_date,service_log_path)
                             log_init = i.get_archive(service_log_path)
                             log_str = str(log_init[0].data, encoding="utf-8")
-                            log_local_name = '/log_everyone_bak/tmp/' + service_name + log_date + '.log'
+                            log_local_name = '/log_everyone_bak/tmp/' + hostname + service_name + log_date + '.log'
+                            print(log_local_name)
                             log_file = open(log_local_name, 'a+')
                             date_now = str(datetime.datetime.now())
                             log_file.write('执行时间:' + date_now)
