@@ -98,11 +98,15 @@ def readFile(filename,chunk_size=512):
 def dir_log(request):
     service_name_list = dao_config.service_name_list
     service_now_list = []
+    service_name_all = []
     log_path = dao_config.log_dir_master
     for i in service_name_list:
-        service_name = log_path + i + '-service'
-        service_now_list.append(service_name)
-    print(service_now_list)
+        service_name_path = log_path + i + '-service'
+        service_name_service = i + '-service'
+        service_name_all.append(service_name_service)
+        service_now_list.append(service_name_path)
+    service_now = {'service_now':service_name_all}
+    return render(request, 'dir_log.html', service_now)
     # if request.method == 'GET':
     #     log_path = request.GET.get('log_path')
     #     log_name = request.GET.get('log_name')
