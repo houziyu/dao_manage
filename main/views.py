@@ -66,7 +66,7 @@ def update_log(request):
         elif all_log:
             docker_log_bak = docker_initial().docker_update_log(all_log=all_log)
             if docker_log_bak:
-                return render(request, 'return_index.html',docker_log_bak)
+                return render(request, 'return_index_all.html',docker_log_bak)
         else:
             errors = {'return_results':'参数传递有错误！请检查!'}
             return render(request, 'return_index.html', errors)
@@ -78,7 +78,7 @@ def download_log(request):
         log_path = request.GET.get('log_path')
         log_name = request.GET.get('log_name')
         print('log_path:',log_path,'log_name:',log_name)
-        the_file_name = log_name  # 显示在弹出对话框中的默认的下载文件名
+        the_file_name = log_name  # 显示在123弹出对话框中的默认的下载文件名
         filename = log_path  # 要下载的文件路径
         response = StreamingHttpResponse(readFile(filename))
         response['Content-Type'] = 'application/octet-stream'
