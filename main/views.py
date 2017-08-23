@@ -111,6 +111,7 @@ def dir_log(request):
             for i in service_now_list:
                 if log_path in i:
                     print(log_path,i)
+                    print(os.listdir(i))
         else:
             service_now = {'service_now':service_name_all}
             return render(request, 'dir_log.html', service_now)

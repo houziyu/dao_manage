@@ -1,7 +1,5 @@
 import  os
 
-aa = []
-aa.append()
 # import docker
 # import datetime
 #
