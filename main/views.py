@@ -4,6 +4,8 @@ from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
 from main.lib import docker_initial
 from django.http import StreamingHttpResponse
+from config import dao_config
+import os
 # Create your views here.
 
 def index(request):
@@ -91,3 +93,17 @@ def readFile(filename,chunk_size=512):
                 yield c
             else:
                 break
+
+@login_required(login_url='/login/')
+def dir_log(request):
+    file_dir_list = []
+    log_dir_master= dao_config.log_dir_master
+    file_dir_start = os.listdir(log_dir_master)
+    for i in file_dir_start:
+        log_dir_master_1 = log_dir_master + i
+        file_dir_list.append(log_dir_master_1)
+    return render(request, 'return_index.html', file_dir_list)
+
+
+
+

@@ -49,7 +49,7 @@ class docker_initial(object):
                             service_log_path = '/logs/' + service_name + '-service/log_info.log'
                             log_init = y.get_archive(service_log_path)
                             log_str = str(log_init[0].data, encoding="utf-8")
-                            log_local_name = '/log_everyone_bak/' + service_name + '-service/update/'+'update'+ hostname + '-' + service_name + '-service' + '-' + log_date + '.log'
+                            log_local_name = dao_config.log_dir_master + service_name + '-service/update/'+'update'+ hostname + '-' + service_name + '-service' + '-' + log_date + '.log'
                             log_file = open(log_local_name, 'a+')
                             date_now = str(datetime.datetime.now())
                             log_file.write('执行时间:' + date_now)
@@ -73,7 +73,7 @@ class docker_initial(object):
                             log_init = i.get_archive(service_log_path)
                             log_str = str(log_init[0].data, encoding="utf-8")
                             log_name = hostname + '-' +service_name +'-'+ log_date + '.log'
-                            log_local_name = '/log_everyone_bak/tmp/' + log_name
+                            log_local_name = dao_config.log_dir_master +'tmp/' + log_name
                             print(log_local_name)
                             log_file = open(log_local_name, 'a+')
                             date_now = str(datetime.datetime.now())
