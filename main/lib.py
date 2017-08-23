@@ -37,6 +37,7 @@ class docker_initial(object):
 
     def docker_update_log(self,all_log=None,hostname=None,container_name=None):
         if all_log:
+            print('狗儿子你跑错了')
             docker_container_all = docker_initial().docker_container_dictionary()
             for i in docker_container_all:
                 hostname = i
@@ -57,6 +58,7 @@ class docker_initial(object):
             return_results = {'return_results': '!备份成功!返回主页!'}
             return return_results
         elif hostname and container_name:
+            print('别她妈跑错地方了')
             docker_container_all = docker_initial().docker_container_dictionary()
             docker_container_list = docker_container_all[hostname]
             print(docker_container_list)
