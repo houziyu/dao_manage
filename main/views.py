@@ -110,7 +110,7 @@ def dir_log(request):
         if log_path:
             for i in service_now_list:
                 if log_path in i:
-                    print(log_path)
+                    print(log_path,i)
         else:
             service_now = {'service_now':service_name_all}
             return render(request, 'dir_log.html', service_now)
