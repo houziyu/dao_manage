@@ -102,7 +102,7 @@ def dir_log(request):
     for i in file_dir_start:
         log_dir_master_1 = log_dir_master + i
         file_dir_list.append(log_dir_master_1)
-    return render(request, 'return_index.html', file_dir_list)
+    return render(request, 'dir_log.html', file_dir_list)
 
 
 
