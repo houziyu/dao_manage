@@ -103,7 +103,8 @@ def dir_log(request):
         log_dir_master_1 = log_dir_master + i
         file_dir_list.append(log_dir_master_1)
     file_fir_dictionary = {'file_dir_list': file_dir_list}
-    return render(request, 'dir_log.html', file_dir_list)
+    print(file_fir_dictionary)
+    return render(request, 'dir_log.html', file_fir_dictionary)
 
 
 
