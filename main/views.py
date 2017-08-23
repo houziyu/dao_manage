@@ -60,6 +60,7 @@ def update_log(request):
         hostname = request.GET.get('hostname')
         container_name = request.GET.get('container_name')
         if hostname and container_name:
+            print('别她妈跑错地方了')
             docker_download_log_path = docker_initial().docker_update_log(hostname,container_name)
             return render(request, 'return_index.html', docker_download_log_path)
         elif all_log:
