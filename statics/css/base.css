@@ -35,6 +35,14 @@
     border-right: 1px solid #e7e7e7;
     border-bottom: 1px solid #e7e7e7;
 }
+.left_div1{
+    position: absolute;
+    margin-top: 46px;
+    width: 15%;
+    height: 46px;
+    border-right: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
 .left_a{
     float: left;
     display: block;

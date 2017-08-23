@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^dashboard/$', views.dashboard,name='dashboard'),
     url(r'^dashboard/logs/$', views.logs, name='logs'),
     url(r'^update_log/$', views.update_log, name='update_log'),
-    # url(r'^logs/$', views.logs, name='logs'),
+    url(r'^download_log/$', views.download_log, name='download_log'),
 ]

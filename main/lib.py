@@ -34,3 +34,27 @@ class docker_initial(object):
                 if i.name == container_name:
                     b_logs = i.logs(tail=dao_config.log_tail_line) #,since=datetime.datetime.now()
                     return b_logs
+
+    def docker_update_log(self,all_log=None,hostname=None,container_name=None):
+        if all_log:
+            print(all_log)
+            return_results={}
+            docker_container_all = docker_initial().docker_container_dictionary()
+            for i in docker_container_all:
+                hostname = i
+                for y in docker_container_all[i]:
+                    service_name = y.name.split('-')[0]
+                    if y.status == 'running':
+                        if service_name in dao_config.service_name_list:
+                            log_date = (datetime.datetime.now() + datetime.timedelta(hours=+8)).strftime("%Y-%m-%d")
+                            service_log_path = '/logs/' + service_name + '-service/log_info.log'
+                            log_init = y.get_archive(service_log_path)
+                            log_str = str(log_init[0].data, encoding="utf-8")
+                            log_local_name = '/log_everyone_bak/' + service_name + '-service/update/'+'update'+ hostname + '-' + service_name + '-service' + '-' + log_date + '.log'
+                            log_file = open(log_local_name, 'a+')
+                            date_now = str(datetime.datetime.now())
+                            log_file.write('执行时间:' + date_now)
+                            log_file.write(log_str)
+                            log_file.close()
+                            return_results = {'return_results': '!备份成功!返回主页!'}
+            return return_results

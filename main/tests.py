@@ -1,18 +1,16 @@
-#
+
+
+
+
 # import docker
 # import datetime
 #
 #
-# service_name_list = ['manage', 'job', 'trace', 'payment', 'message', 'user', 'order']
-# host_list = ['docker_dev2', 'docker_dev3']
-# docker_all = {}
-# for i in host_list:
-#     docker_singleton = docker.DockerClient(base_url='tcp://%s:2375' % i)
-#     docker_all[i] = docker_singleton
-# docker_container_all = {}
-# for i, v in docker_all.items():
-#     docker_container_all[i] = v.containers.list(all=True)
-# print('docker_container_all:', docker_container_all)
+#
+# docker_singleton = docker.DockerClient(base_url='tcp://docker_master:2375')
+# docker_con = docker_singleton.containers.list()
+# print(docker_con[0].image)
+# print(type(docker_con[0].image))
 # for i in docker_container_all:
 #     hostname= i
 #     for y in docker_container_all[i]:
