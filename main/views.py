@@ -63,6 +63,7 @@ def update_log(request):
             print(hostname, container_name)
         elif all_log:
             docker_container_all = docker_initial().docker_update_log(all_log)
+            print('docker_container_all:',docker_container_all)
             if docker_container_all:
                 return render(request, 'return_index.html',docker_container_all)
         else:
