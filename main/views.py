@@ -96,15 +96,25 @@ def readFile(filename,chunk_size=512):
 
 @login_required(login_url='/login/')
 def dir_log(request):
-    file_dir_list = []
-    log_dir_master= dao_config.log_dir_master
-    file_dir_start = os.listdir(log_dir_master)
-    for i in file_dir_start:
-        log_dir_master_1 = log_dir_master + i
-        file_dir_list.append(log_dir_master_1)
-    file_fir_dictionary = {'file_dir_list': file_dir_list,'service_list':file_dir_start}
-    print(file_fir_dictionary)
-    return render(request, 'dir_log.html', file_fir_dictionary)
+    service_name_list = dao_config.service_name_list
+    service_now_list = []
+    log_path = dao_config.log_dir_master
+    for i in service_name_list:
+        service_name = log_path + i + '-service'
+        service_now_list.append(service_name)
+    print(service_now_list)
+    # if request.method == 'GET':
+    #     log_path = request.GET.get('log_path')
+    #     log_name = request.GET.get('log_name')
+    #     file_dir_list = []
+    #     log_dir_master= dao_config.log_dir_master
+    #     file_dir_start = os.listdir(log_dir_master)
+    #     for i in file_dir_start:
+    #         log_dir_master_1 = log_dir_master + i
+    #         file_dir_list.append(log_dir_master_1)
+    #     file_fir_dictionary = {'file_dir_list': file_dir_list,'service_list':file_dir_start}
+    #     print(file_fir_dictionary)
+    #     return render(request, 'dir_log.html', file_fir_dictionary)
 
 
 
