@@ -105,9 +105,8 @@ def update_log(request):
 #         archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
 #         archive.write(log_path)
 #         archive.close()
-#
-#
-#         response = StreamingHttpResponse(readFile(log_path))
+#         wrapper = FileWrapper(temp)
+#         response = StreamingHttpResponse(readFile(wrapper))
 #         response['Content-Type'] = 'application/octet-stream'
 #         response['Content-Disposition'] = 'attachment;filename="{0}"'.format(log_name)
 #         return response
@@ -130,6 +129,7 @@ def download_log(request):
         archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
         archive.write(log_path)
         archive.close()
+
         wrapper = FileWrapper(temp)
         response = HttpResponse(wrapper, content_type='application/zip')
         response['Content-Disposition'] = 'attachment; filename='+ log_name+'.zip'

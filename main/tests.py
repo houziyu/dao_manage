@@ -57,11 +57,6 @@
 
 
 
-
-
-
-
-
 # docker_singleton = docker.DockerClient(base_url='tcp://docker_node2:2375')
 # docker_list  = docker_singleton.containers.list()
 # print(docker_list[0].status)
