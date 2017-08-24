@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from main.lib import docker_initial
 from django.http import StreamingHttpResponse
 from config import dao_config
-import os,zipfile
+import os,zipfile,time
 from django.http import HttpResponse
 # Create your views here.
 
@@ -88,6 +88,7 @@ def download_log(request):
         archive.write(log_path)
         #写入结束
         archive.close()
+        time.sleep(5)
         print(zip_file_name)
         if os.path.isfile(zip_file_name):
             response = StreamingHttpResponse(readFile(zip_dir))
