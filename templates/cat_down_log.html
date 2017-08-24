@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-    {% for i in file_name_list %}
-        <p><a href='#'>{{ i }}</a></p>
+    {% for key,vale in file_name_list %}
+        <p><a href='#'>{{ key }}{{ vale }}</a></p>
     {% endfor %}
 {% endblock %}
