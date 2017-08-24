@@ -132,7 +132,7 @@ def download_log(request):
         archive.close()
         wrapper = FileWrapper(temp)
         response = HttpResponse(wrapper, content_type='application/zip')
-        response['Content-Disposition'] = 'attachment; filename=test.zip'
+        response['Content-Disposition'] = 'attachment; filename='+ log_name+'.zip'
         response['Content-Length'] = temp.tell()
         temp.seek(0)
         return response
