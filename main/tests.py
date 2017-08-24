@@ -95,3 +95,4 @@
 # b = 'ordervdsevice.1.dsfajoijoi932irw0j320n'
 # print(s.split('-')[0])
 # print(b.split('-')[0])
+

@@ -129,9 +129,11 @@ def download_log(request):
         archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
         archive.write(log_path)
         archive.close()
-        response = StreamingHttpResponse(temp)
-        response['Content-Type'] = 'application/zip'
-        response['Content-Disposition'] = 'attachment;filename="{0}"'.format(log_name+'.zip')
+        # wrapper = FileWrapper(temp)
+        response = HttpResponse(temp, content_type='application/zip') #tmp=wrapper
+        response['Content-Disposition'] = 'attachment; filename="{0}"'.format(log_name+'zip')
+        # response['Content-Length'] = temp.tell()
+        # temp.seek(0)
         return response
 
 @login_required(login_url='/login/')
