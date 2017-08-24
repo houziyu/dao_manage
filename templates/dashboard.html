@@ -28,7 +28,7 @@ $(function(){
                     <td>id</td>
                     <td>{{ hostname }}</td>
                     <td><a href="logs/?hostname={{ hostname }}&container_name={{ i.name }}">{{ i.name }}</a></td>
-                    <td>{{ i.image.tags.0 }}</td>
+                    <td>{{ i.image.tags|last }}</td>
                     <td>{{ i.short_id}}</td>
                     <td>{{ i.status }}</td>
                 </tr>
