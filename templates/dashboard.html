@@ -30,7 +30,7 @@ $(function(){
                     <td><a href="logs/?hostname={{ hostname }}&container_name={{ i.name }}">{{ i.name }}</a></td>
                     {% for y in i.image.tags %}
                     <td>{{ y }}</td>
-                    {% endfor %}
+                    {% endfor %} 
                     <td>{{ i.short_id}}</td>
                     <td>{{ i.status }}</td>
                 </tr>
