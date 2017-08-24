@@ -1,14 +1,14 @@
-import  os
-import docker
-import datetime
-#
-#
-#
-docker_singleton = docker.DockerClient(base_url='tcp://docker_master:2375')
-docker_con = docker_singleton.containers.list()
-aa = docker_con[0].image
-print(aa.tags[-1])
-print(dir(aa))
+# import  os
+# import docker
+# import datetime
+# #
+# #
+# #
+# docker_singleton = docker.DockerClient(base_url='tcp://docker_master:2375')
+# docker_con = docker_singleton.containers.list()
+# aa = docker_con[0].image
+# print(aa.tags[-1])
+# print(dir(aa))
 # print(docker_con[0].image)
 # print(type(docker_con[0].image))
 # for i in docker_container_all:
