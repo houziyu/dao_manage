@@ -1,5 +1,7 @@
 import  os
-
+a  = '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-22.log'
+b = a.split('/')
+print(b[-1])
 # import docker
 # import datetime
 #

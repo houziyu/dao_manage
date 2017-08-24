@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block body %}
+    {% for i in file_name_list %}
+        <p><a href='#'>{{ i }}</a></p>
+    {% endfor %}
+{% endblock %}
