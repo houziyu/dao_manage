@@ -121,7 +121,7 @@ def dir_log(request):
                         file_str = i.split('/')[-1]
                         file_name_list[file_str] = i
                     print(file_name_list)
-                    return render(request, 'cat_down_log.html', file_name_list)
+                    return render(request, 'cat_down_log.html' , file_name_list)
         else:
             service_now = {'service_now':service_name_all}
             return render(request, 'dir_log.html', service_now)
