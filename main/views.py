@@ -131,7 +131,7 @@ def download_log(request):
         archive.close()
         response = StreamingHttpResponse(temp)
         response['Content-Type'] = 'application/zip'
-        response['Content-Disposition'] = 'attachment;filename="{0}"'.format(log_name)
+        response['Content-Disposition'] = 'attachment;filename="{0}"'.format(log_name+'.zip')
         return response
 
 @login_required(login_url='/login/')
