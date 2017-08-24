@@ -79,11 +79,16 @@ def download_log(request):
         log_path = request.GET.get('log_path')
         log_name = request.GET.get('log_name')
         print('log_path:',log_path,'log_name:',log_name)
+        #定义zip文件名称。
         zip_file_name = log_name + '.zip'
+        #打包文件后置放的目录地址。
         zip_dir = dao_config.log_dir_master + 'tmp/'+ zip_file_name
         archive = zipfile.ZipFile(zip_dir, 'w', zipfile.ZIP_DEFLATED)
+        #写入zip中文件的地址及名称
         archive.write(log_path)
+        #写入结束
         archive.close()
+        print(zip_file_name)
         if os.path.isfile(zip_file_name):
             response = StreamingHttpResponse(readFile(zip_dir))
             response['Content-Type'] = 'application/octet-stream'
