@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
     {% for key,vale in file_name_list.items %}
-        <p><a href='#'>{{ key }}{{ vale }}</a></p>
+        <p><a href='/download_log/?log_name={{ key }}&log_path={{ vale }}'>{{ key }}{{ vale }}</a></p>
     {% endfor %}
 {% endblock %}
