@@ -88,8 +88,7 @@ def download_log(request):
         archive.write(log_path)
         #写入结束
         archive.close()
-        time.sleep(5)
-        print(zip_file_name)
+        print(zip_dir)
         if os.path.isfile(zip_dir):
             response = StreamingHttpResponse(readFile(zip_dir))
             response['Content-Type'] = 'application/octet-stream'
