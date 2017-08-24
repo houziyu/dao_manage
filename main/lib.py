@@ -85,5 +85,5 @@ class docker_initial(object):
                             return_results = {'return_results': log_local_name,'log_name':log_name}
                             return return_results
                     else:
-                        return_results = {'return_results': None, 'log_name': 'docker容器状态为None，请检查！'}
+                        return_results = {'return_results': None, 'log_name': 'docker容器状态为exit，请检查！'}
                         return return_results
