@@ -101,7 +101,7 @@ def dir_log(request):
         service_now_list = []
         service_name_all = []
         file_dir_list = []
-        file_name_list = {}
+
         log_path = dao_config.log_dir_master
         for i in service_name_list:
             service_name_path = log_path + i + '-service'
@@ -112,7 +112,7 @@ def dir_log(request):
         if log_path:
             for i in service_now_list:
                 if log_path in i:
-                    print(log_path,i)
+                    file_name_list = {}
                     for y in os.listdir(i):
                         filename = i+'/'+ y
                         if os.path.isfile(filename):
@@ -120,6 +120,7 @@ def dir_log(request):
                     for i in file_dir_list:
                         file_str = i.split('/')[-1]
                         file_name_list[file_str] = i
+                    print(file_name_list)
                     return render(request, 'cat_down_log.html', file_name_list)
         else:
             service_now = {'service_now':service_name_all}
