@@ -90,7 +90,7 @@ def download_log(request):
         archive.close()
         time.sleep(5)
         print(zip_file_name)
-        if os.path.isfile(zip_file_name):
+        if os.path.isfile(zip_dir):
             response = StreamingHttpResponse(readFile(zip_dir))
             response['Content-Type'] = 'application/octet-stream'
             response['Content-Disposition'] = 'attachment;filename="{0}"'.format(zip_file_name)
