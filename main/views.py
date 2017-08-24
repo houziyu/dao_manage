@@ -5,7 +5,9 @@ from django.contrib.auth.decorators import login_required
 from main.lib import docker_initial
 from django.http import StreamingHttpResponse
 from config import dao_config
-import os
+import os, tempfile, zipfile
+from django.http import HttpResponse
+from wsgiref.util import FileWrapper
 # Create your views here.
 
 def index(request):
@@ -72,27 +74,45 @@ def update_log(request):
             return render(request, 'return_index.html', errors)
     return HttpResponse('出错了~')
 
+# @login_required(login_url='/login/')
+# def download_log(request):
+#     if request.method == 'GET':
+#         log_path = request.GET.get('log_path')
+#         log_name = request.GET.get('log_name')
+#         print('log_path:',log_path,'log_name:',log_name)
+#         the_file_name = log_name  # 显示在123弹出对话框中的默认的下载文件名
+#         filename = log_path  # 要下载的文件路径
+#         response = StreamingHttpResponse(readFile(filename))
+#         response['Content-Type'] = 'application/octet-stream'
+#         response['Content-Disposition'] = 'attachment;filename="{0}"'.format(the_file_name)
+#         return response
+#
+# def readFile(filename,chunk_size=512):
+#     with open(filename,'rb') as f:
+#         while True:
+#             c=f.read(chunk_size)
+#             if c:
+#                 yield c
+#             else:
+#                 break
 @login_required(login_url='/login/')
 def download_log(request):
     if request.method == 'GET':
         log_path = request.GET.get('log_path')
         log_name = request.GET.get('log_name')
         print('log_path:',log_path,'log_name:',log_name)
-        the_file_name = log_name  # 显示在123弹出对话框中的默认的下载文件名
-        filename = log_path  # 要下载的文件路径
-        response = StreamingHttpResponse(readFile(filename))
-        response['Content-Type'] = 'application/octet-stream'
-        response['Content-Disposition'] = 'attachment;filename="{0}"'.format(the_file_name)
+        temp = tempfile.TemporaryFile()
+        archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
+        for index in range(10):
+            filename = log_path  # Select your files here.
+            archive.write(filename, 'file%d.txt' % index)
+        archive.close()
+        wrapper = FileWrapper(temp)
+        response = HttpResponse(wrapper, content_type='application/zip')
+        response['Content-Disposition'] = 'attachment; filename=test.zip'
+        response['Content-Length'] = temp.tell()
+        temp.seek(0)
         return response
-
-def readFile(filename,chunk_size=512):
-    with open(filename,'rb') as f:
-        while True:
-            c=f.read(chunk_size)
-            if c:
-                yield c
-            else:
-                break
 
 @login_required(login_url='/login/')
 def dir_log(request):
