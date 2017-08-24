@@ -95,6 +95,31 @@ def update_log(request):
 #                 yield c
 #             else:
 #                 break
+# @login_required(login_url='/login/')
+# def download_log(request):
+#     if request.method == 'GET':
+#         log_path = request.GET.get('log_path')
+#         log_name = request.GET.get('log_name')
+#         print('log_path:',log_path,'log_name:',log_name)
+#         temp = tempfile.TemporaryFile()
+#         archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
+#         archive.write(log_path)
+#         archive.close()
+#
+#
+#         response = StreamingHttpResponse(readFile(log_path))
+#         response['Content-Type'] = 'application/octet-stream'
+#         response['Content-Disposition'] = 'attachment;filename="{0}"'.format(log_name)
+#         return response
+#
+# def readFile(filename,chunk_size=512):
+#     with open(filename,'rb') as f:
+#         while True:
+#             c=f.read(chunk_size)
+#             if c:
+#                 yield c
+#             else:
+#                 break
 @login_required(login_url='/login/')
 def download_log(request):
     if request.method == 'GET':
@@ -103,13 +128,13 @@ def download_log(request):
         print('log_path:',log_path,'log_name:',log_name)
         temp = tempfile.TemporaryFile()
         archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
-        archive.write(log_path,log_name)
+        archive.write(log_path)
+        archive.close()
         wrapper = FileWrapper(temp)
         response = HttpResponse(wrapper, content_type='application/zip')
         response['Content-Disposition'] = 'attachment; filename=test.zip'
         response['Content-Length'] = temp.tell()
         temp.seek(0)
-        archive.close()
         return response
 
 @login_required(login_url='/login/')
