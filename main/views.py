@@ -104,12 +104,12 @@ def download_log(request):
         temp = tempfile.TemporaryFile()
         archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
         archive.write(log_path,log_name)
-        archive.close()
         wrapper = FileWrapper(temp)
         response = HttpResponse(wrapper, content_type='application/zip')
         response['Content-Disposition'] = 'attachment; filename=test.zip'
         response['Content-Length'] = temp.tell()
         temp.seek(0)
+        archive.close()
         return response
 
 @login_required(login_url='/login/')
