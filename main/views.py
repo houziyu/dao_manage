@@ -112,14 +112,14 @@ def dir_log(request):
         if log_path:
             for i in service_now_list:
                 if log_path in i:
-                    file_name_list = {}
+                    file_name_list = {'file_name_list':{}}
                     for y in os.listdir(i):
                         filename = i+'/'+ y
                         if os.path.isfile(filename):
                             file_dir_list.append(filename)
                     for i in file_dir_list:
                         file_str = i.split('/')[-1]
-                        file_name_list[file_str] = i
+                        file_name_list['file_name_list'][file_str] = i
                     print(file_name_list)
                     return render(request, 'cat_down_log.html' , file_name_list)
         else:
