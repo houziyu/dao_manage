@@ -78,17 +78,19 @@ def download_log(request):
     if request.method == 'GET':
         log_path = request.GET.get('log_path')
         log_name = request.GET.get('log_name')
-        print('log_path:',log_path,'log_name:',log_name)
-        zip_file_name = log_name + '.zip'
-        zip_dir = dao_config.log_dir_master + 'tmp/'+ zip_file_name
-        archive = zipfile.ZipFile(zip_dir, 'w', zipfile.ZIP_DEFLATED)
-        archive.write(log_path)
-        archive.close()
-        response = StreamingHttpResponse(readFile(zip_dir))
-        response['Content-Type'] = 'application/octet-stream'
-        response['Content-Disposition'] = 'attachment;filename="{0}"'.format(zip_file_name)
-        os.remove(zip_dir)
-        return response
+        if os.path.isfile(log_path):
+            print('log_path:',log_path,'log_name:',log_name)
+            zip_file_name = log_name + '.zip'
+            zip_dir = dao_config.log_dir_master + 'tmp/'+ zip_file_name
+            archive = zipfile.ZipFile(zip_dir, 'w', zipfile.ZIP_DEFLATED)
+            archive.write(log_path)
+            archive.close()
+            response = StreamingHttpResponse(readFile(zip_dir))
+            response['Content-Type'] = 'application/octet-stream'
+            response['Content-Disposition'] = 'attachment;filename="{0}"'.format(zip_file_name)
+            return response
+        else:
+            return HttpResponse('没有这个文件')
 
 def readFile(filename,chunk_size=512):
     with open(filename,'rb') as f:
