@@ -5,9 +5,8 @@ from django.contrib.auth.decorators import login_required
 from main.lib import docker_initial
 from django.http import StreamingHttpResponse
 from config import dao_config
-import os, tempfile, zipfile
+import os,zipfile
 from django.http import HttpResponse
-from wsgiref.util import FileWrapper
 # Create your views here.
 
 def index(request):
@@ -74,67 +73,30 @@ def update_log(request):
             return render(request, 'return_index.html', errors)
     return HttpResponse('出错了~')
 
-# @login_required(login_url='/login/')
-# def download_log(request):
-#     if request.method == 'GET':
-#         log_path = request.GET.get('log_path')
-#         log_name = request.GET.get('log_name')
-#         print('log_path:',log_path,'log_name:',log_name)
-#         the_file_name = log_name  # 显示在123弹出对话框中的默认的下载文件名
-#         filename = log_path  # 要下载的文件路径
-#         response = StreamingHttpResponse(readFile(filename))
-#         response['Content-Type'] = 'application/octet-stream'
-#         response['Content-Disposition'] = 'attachment;filename="{0}"'.format(the_file_name)
-#         return response
-#
-# def readFile(filename,chunk_size=512):
-#     with open(filename,'rb') as f:
-#         while True:
-#             c=f.read(chunk_size)
-#             if c:
-#                 yield c
-#             else:
-#                 break
-# @login_required(login_url='/login/')
-# def download_log(request):
-#     if request.method == 'GET':
-#         log_path = request.GET.get('log_path')
-#         log_name = request.GET.get('log_name')
-#         print('log_path:',log_path,'log_name:',log_name)
-#         temp = tempfile.TemporaryFile()
-#         archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
-#         archive.write(log_path)
-#         archive.close()
-#         wrapper = FileWrapper(temp)
-#         response = StreamingHttpResponse(readFile(wrapper))
-#         response['Content-Type'] = 'application/octet-stream'
-#         response['Content-Disposition'] = 'attachment;filename="{0}"'.format(log_name)
-#         return response
-#
-# def readFile(filename,chunk_size=512):
-#     with open(filename,'rb') as f:
-#         while True:
-#             c=f.read(chunk_size)
-#             if c:
-#                 yield c
-#             else:
-#                 break
 @login_required(login_url='/login/')
 def download_log(request):
     if request.method == 'GET':
         log_path = request.GET.get('log_path')
         log_name = request.GET.get('log_name')
         print('log_path:',log_path,'log_name:',log_name)
-        temp = tempfile.TemporaryFile()
-        archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
+        zip_file_name = log_name + '.zip'
+        zip_dir = dao_config.log_dir_master + 'tmp/'+ zip_file_name
+        archive = zipfile.ZipFile(zip_dir, 'w', zipfile.ZIP_DEFLATED)
         archive.write(log_path)
         archive.close()
-        # wrapper = FileWrapper(temp)
-        response = HttpResponse(temp, content_type='application/zip') #tmp=wrapper
-        response['Content-Disposition'] = 'attachment; filename="{0}"'.format(log_name+'zip')
-        # response['Content-Length'] = temp.tell()
-        # temp.seek(0)
+        response = StreamingHttpResponse(readFile(zip_dir))
+        response['Content-Type'] = 'application/octet-stream'
+        response['Content-Disposition'] = 'attachment;filename="{0}"'.format(zip_file_name)
         return response
+
+def readFile(filename,chunk_size=512):
+    with open(filename,'rb') as f:
+        while True:
+            c=f.read(chunk_size)
+            if c:
+                yield c
+            else:
+                break
 
 @login_required(login_url='/login/')
 def dir_log(request):

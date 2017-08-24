@@ -96,3 +96,8 @@
 # print(s.split('-')[0])
 # print(b.split('-')[0])
 
+import zipfile
+file_path = '/Users/yunque/Downloads/123.zip'
+archive = zipfile.ZipFile(file_path, 'w', zipfile.ZIP_DEFLATED)
+archive.write('/Users/yunque/Downloads/order.log')
+archive.close()
