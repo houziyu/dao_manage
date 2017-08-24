@@ -67,9 +67,9 @@ def update_log(request):
         elif all_log:
             docker_log_bak = docker_initial().docker_update_log(all_log=all_log)
             if docker_log_bak:
-                return render(request, 'return_index_all.html',docker_log_bak)
+                return render(request, 'return_index.html',docker_log_bak)
         else:
-            errors = {'return_results':'参数传递有错误！请检查!'}
+            errors = {'return_results':'参数传递有错误！请检查!','log_name':None}
             return render(request, 'return_index.html', errors)
     return HttpResponse('出错了~')
 
