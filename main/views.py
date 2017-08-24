@@ -87,6 +87,7 @@ def download_log(request):
         response = StreamingHttpResponse(readFile(zip_dir))
         response['Content-Type'] = 'application/octet-stream'
         response['Content-Disposition'] = 'attachment;filename="{0}"'.format(zip_file_name)
+        os.remove(zip_dir)
         return response
 
 def readFile(filename,chunk_size=512):
