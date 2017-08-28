@@ -121,8 +121,6 @@ def dir_log(request):
             service_name_all.append(service_name_service)
             service_now_list.append(service_name_path)
         log_path = request.GET.get('find_name')
-        print('service_now_list:',service_now_list)
-        print('file_dir_list:',file_dir_list)
         if log_path:
             for i in service_now_list:
                 if log_path in i:
@@ -131,6 +129,7 @@ def dir_log(request):
                         filename = i+'/'+ y
                         if os.path.isfile(filename):
                             file_dir_list.append(filename)
+                    print('file_dir_list:', file_dir_list)
                     for i in file_dir_list:
                         file_str = i.split('/')[-1]
                         file_name_list['file_name_list'][file_str] = i
