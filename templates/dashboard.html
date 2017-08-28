@@ -1,13 +1,6 @@
 {% extends 'base.html' %}
 {% block extra-head-resources %}
-<script >
-$(function(){
-    var len = $('table tr').length;
-    for(var i = 1;i<len;i++){
-        $('table tr:eq('+i+') td:first').text(i);
-    }
-});
-</script>
+<script type="text/javascript" src="/static/js/id_numb.js"></script>
 {% endblock %}
 {% block body %}
 <table class="table table-bordered;table table-hover" style="margin-top: 10px">

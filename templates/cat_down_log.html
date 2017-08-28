@@ -1,6 +1,26 @@
 {% extends 'base.html' %}
+
+{% block extra-head-resources %}
+<script type="text/javascript" src="/static/js/id_numb.js"></script>
+{% endblock %}
+
 {% block body %}
-    {% for key,vale in file_name_list.items %}
-        <p><a href='/download_log/?log_name={{ key }}&log_path={{ vale }}'>{{ key }}</a></p>
-    {% endfor %}
+<table class="table table-bordered;table table-hover" style="margin-top: 10px">
+    <thead>
+        <tr>
+            <th>Ordinal number</th>
+            <th>File Name</th>
+            <th>File Path</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key,vale in file_name_list.items %}
+                <tr>
+                    <td>id</td>
+                    <td><a href='/download_log/?log_name={{ key }}&log_path={{ vale }}'>{{ key }}</a></td>
+                    <td>{{ vale }}</td>
+                </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
