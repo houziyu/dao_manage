@@ -3,6 +3,7 @@ from config import dao_config
 import datetime
 
 class docker_initial(object):
+    #docker连接初始化操作
     def __init__(self):
         host_list = dao_config.host_list
         self.docker_all = {}
@@ -10,14 +11,14 @@ class docker_initial(object):
             self.docker_singleton = docker.DockerClient(base_url='tcp://%s:2375'%i)
             self.docker_all[i] = self.docker_singleton
         print('docker_host_dictionary:',self.docker_all)
-
+    #docker调用所有容器，做成列表交给别的方法进行处理
     def docker_container_dictionary(self):
         docker_container_all = {}
         for i,v in self.docker_all.items():
             docker_container_all[i]= v.containers.list(all=True)
         print('docker_container_all:',docker_container_all)
         return docker_container_all
-
+    #docker log日志的调取及查看
     def docker_logs(self,hostname,container_name,find_time):
         docker_container_all = docker_initial().docker_container_dictionary()
         container_all = docker_container_all[hostname]
@@ -34,7 +35,7 @@ class docker_initial(object):
                 if i.name == container_name:
                     b_logs = i.logs(tail=dao_config.log_tail_line) #,since=datetime.datetime.now()
                     return b_logs
-
+    #docker log的备份，分两种方式，一种是所有的日志全部备份在升级前，第二种是开发人员查看当天的日志需要进行下拉下载操作临时文件都保存在了tmp目录下
     def docker_update_log(self,all_log=None,hostname=None,container_name=None):
         if all_log:
             print('这里是全员备份')

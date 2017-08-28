@@ -8,17 +8,27 @@
 # docker_con = docker_singleton.containers.list()
 # aa = docker_con[0]
 # print(aa.stats(stream=False))
-
-aa = ['docker_dev2-manage-service-2017-08-27.log','docker_dev2-manage-service-2017-08-23.log','docker_dev2-manage-service-2017-08-26.log','docker_dev2-manage-service-2017-08-22.log','docker_dev2-manage-service-2017-08-24.log','docker_dev2-manage-service-2017-08-20.log']
-print(aa)
-
-
+# file_name_list= {'file_name_list': {'docker_dev2-manage-service-2017-08-27.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-27.log', 'docker_dev2-manage-service-2017-08-23.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-23.log', 'docker_dev2-manage-service-2017-08-26.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-26.log', 'docker_dev2-manage-service-2017-08-22.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-22.log', 'docker_dev2-manage-service-2017-08-24.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-24.log', 'docker_dev2-manage-service-2017-08-20.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-20.log', 'docker_dev2-manage-service-2017-08-25.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-25.log'}}
+#
+# print(sorted(file_name_list['file_name_list'], key=str.lower))
 
 
 
-
-
-print(sorted(aa, key=str.lower))
+# for i in dd :
+#     cc.append(float(i))
+# print(cc)
+# for i in cc:
+#     print(type(i))
+# aa = ['docker_dev2-manage-service-2017-08-27.log','docker_dev2-manage-service-2017-08-23.log','docker_dev2-manage-service-2017-08-26.log','docker_dev2-manage-service-2017-08-22.log','docker_dev2-manage-service-2017-08-24.log','docker_dev2-manage-service-2017-08-20.log']
+# print(aa)
+#
+#
+#
+#
+#
+#
+#
+# print(sorted(aa, key=str.lower))
 # print(aa.tags[-1])
 # print(dir(aa))
 # print(docker_con[0].image)

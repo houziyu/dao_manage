@@ -1,6 +1,8 @@
 from main.lib import docker_initial
 import datetime
 from config import dao_config
+
+#定时下拉备份日志 python3 manage.py crontab add  启动后记得添加上定时任务(python3 manage.py crontab remove)删除
 def cron_download_log():
     docker_container_all = docker_initial().docker_container_dictionary()
     for i in docker_container_all:
