@@ -122,6 +122,7 @@ def dir_log(request):
             service_now_list.append(service_name_path)
         log_path = request.GET.get('find_name')
         print('service_now_list:',service_now_list)
+        print('file_dir_list:',file_dir_list)
         if log_path:
             for i in service_now_list:
                 if log_path in i:
