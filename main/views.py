@@ -130,6 +130,8 @@ def dir_log(request):
                         if os.path.isfile(filename):
                             file_dir_list.append(filename)
                     print('file_dir_list:', file_dir_list)
+                    #进行排序操作
+                    file_dir_list = sorted(file_dir_list, key=str.lower)
                     for i in file_dir_list:
                         file_str = i.split('/')[-1]
                         file_name_list['file_name_list'][file_str] = i
