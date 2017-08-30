@@ -32,7 +32,7 @@
         {% endif %}
             <span class="current">
                 Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}
-            </span>
+            </span> 
         {% if contacts.has_next %}
             <li><a href="?page={{ contacts.next_page_number }}&service_name={{ i }}">下一页</a></li>
         {% endif %}
