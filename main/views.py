@@ -133,6 +133,7 @@ def html_page(request):
             all_file.append([i,file_path])
     print(all_file)
     all_file = sorted(all_file, key=lambda file_name: file_name[1])
+    print(all_file)
     paginator = Paginator(all_file, 10)  # Show 25 contacts per page
     page = request.GET.get('page')
     try:
