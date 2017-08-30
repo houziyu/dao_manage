@@ -24,8 +24,39 @@
 #     print(type(i))
 # aa = ['docker_dev2-manage-service-2017-08-27.log','docker_dev2-manage-service-2017-08-23.log','docker_dev2-manage-service-2017-08-26.log','docker_dev2-manage-service-2017-08-22.log','docker_dev2-manage-service-2017-08-24.log','docker_dev2-manage-service-2017-08-20.log']
 # print(aa)
+# import itchat
+# itchat.login()
+# #爬取自己好友相关信息， 返回一个json文件
+# friends = itchat.get_friends(update=True)[0:]
+# import re
+# siglist = []
+# for i in friends:
+#     signature = i["Signature"].strip().replace("span","").replace("class","").replace("emoji","")
+#     rep = re.compile("1f\d+\w*|[<>/=]")
+#     signature = rep.sub("", signature)
+#     siglist.append(signature)
+# text = "".join(siglist)
 #
+# import jieba
+# wordlist = jieba.cut(text, cut_all=True)
+# word_space_split = " ".join(wordlist)
+# import matplotlib.pyplot as plt
+# from wordcloud import WordCloud, ImageColorGenerator
+# import numpy as np
+# import PIL.Image as Image
 #
+# coloring = np.array(Image.open("/Users/yunque/Desktop/wechat.jpg"))
+# my_wordcloud = WordCloud(background_color="white", max_words=2000,
+#                          mask=coloring, max_font_size=60, random_state=42, scale=2,
+#                          font_path="/Users/yunque/Downloads/simhei.ttf").generate(word_space_split)
+#
+# image_colors = ImageColorGenerator(coloring)
+# plt.imshow(my_wordcloud.recolor(color_func=image_colors))
+# plt.imshow(my_wordcloud)
+# plt.axis("off")
+# plt.show()
+# #
+# #
 # a = 1
 # b = 1
 # c = 0
