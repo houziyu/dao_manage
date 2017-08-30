@@ -96,7 +96,7 @@ def download_log(request):
             response['Content-Disposition'] = 'attachment;filename="{0}"'.format(zip_file_name)
             return response
         else:
-            return HttpResponse('没有这个文件')
+            return HttpResponse('没有这个文件') 
 
 def readFile(filename,chunk_size=512):
     with open(filename,'rb') as f:
