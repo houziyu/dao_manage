@@ -113,8 +113,6 @@ def dir_log(request):
         service_name_list = dao_config.service_name_list
         service_now_list = []
         service_name_all = []
-        # file_dir_list = []
-
         log_path = dao_config.log_dir_master
         for i in service_name_list:
             service_name_path = log_path + i + '-service'
@@ -130,9 +128,10 @@ def html_page(request):
     service_name_path = log_path + service_name
     all_file = []
     for i in os.listdir(service_name_path):
-            file_path = service_name_path +'/' + i
-            if os.path.isfile(file_path):
-                all_file.append([i,file_path])
+        file_path = service_name_path +'/' + i
+        if os.path.isfile(file_path):
+            all_file.append([i,file_path])
+    all_file = sorted(all_file,key=str.lower)
     print(all_file)
     paginator = Paginator(all_file, 10)  # Show 25 contacts per page
     page = request.GET.get('page')

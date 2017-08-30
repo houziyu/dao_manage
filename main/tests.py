@@ -11,12 +11,12 @@
 # file_name_list= {'file_name_list': {'docker_dev2-manage-service-2017-08-27.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-27.log', 'docker_dev2-manage-service-2017-08-23.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-23.log', 'docker_dev2-manage-service-2017-08-26.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-26.log', 'docker_dev2-manage-service-2017-08-22.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-22.log', 'docker_dev2-manage-service-2017-08-24.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-24.log', 'docker_dev2-manage-service-2017-08-20.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-20.log', 'docker_dev2-manage-service-2017-08-25.log': '/log_everyone_bak/manage-service/docker_dev2-manage-service-2017-08-25.log'}}
 #
 # print(sorted(file_name_list['file_name_list'], key=str.lower))
-import  os
-def check_os_load():
-    load = os.getloadavg()
-    return (round(load[0],2),round(load[1],2),round(load[2],2))
-aa = check_os_load
-print(aa)
+# import  os
+# def check_os_load():
+#     load = os.getloadavg()
+#     return (round(load[0],2),round(load[1],2),round(load[2],2))
+# aa = check_os_load
+# print(aa)
 # for i in dd :
 #     cc.append(float(i))
 # print(cc)
