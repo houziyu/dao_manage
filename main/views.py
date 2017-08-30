@@ -131,8 +131,8 @@ def html_page(request):
         file_path = service_name_path +'/' + i
         if os.path.isfile(file_path):
             all_file.append([i,file_path])
-    all_file = sorted(all_file,key=str.lower)
     print(all_file)
+    all_file = sorted(all_file, key=lambda file_name: file_name[1])
     paginator = Paginator(all_file, 10)  # Show 25 contacts per page
     page = request.GET.get('page')
     try:
