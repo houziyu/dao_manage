@@ -5,8 +5,9 @@ from django.contrib.auth.decorators import login_required
 from main.lib import docker_initial
 from django.http import StreamingHttpResponse
 from config import dao_config
-import os,zipfile,time
+import os,zipfile
 from django.http import HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 def index(request):
@@ -112,7 +113,7 @@ def dir_log(request):
         service_name_list = dao_config.service_name_list
         service_now_list = []
         service_name_all = []
-        file_dir_list = []
+        # file_dir_list = []
 
         log_path = dao_config.log_dir_master
         for i in service_name_list:
@@ -120,23 +121,25 @@ def dir_log(request):
             service_name_service = i + '-service'
             service_name_all.append(service_name_service)
             service_now_list.append(service_name_path)
-        log_path = request.GET.get('find_name')
-        if log_path:
-            for i in service_now_list:
-                if log_path in i:
-                    file_name_list = {'file_name_list':{}}
-                    for y in os.listdir(i):
-                        filename = i+'/'+ y
-                        if os.path.isfile(filename):
-                            file_dir_list.append(filename)
-                    print('file_dir_list:', file_dir_list)
-                    #进行排序操作
-                    file_dir_list = sorted(file_dir_list, key=str.lower)
-                    for i in file_dir_list:
-                        file_str = i.split('/')[-1]
-                        file_name_list['file_name_list'][file_str] = i
-                    print('file_name_list:',file_name_list)
-                    return render(request, 'cat_down_log.html' , file_name_list)
-        else:
-            service_now = {'service_now':service_name_all}
-            return render(request, 'dir_log.html', service_now)
+        service_now = {'service_now': service_name_all}
+        return render(request, 'dir_log.html', service_now)
+
+def html_page(request):
+    service_name  = request.GET.get('service_name')
+    log_path = dao_config.log_dir_master
+    service_name_path = log_path + service_name
+    all_file = []
+    for i in os.listdir(service_name_path):
+            file_path = service_name_path +'/' + i
+            if os.path.isfile(file_path):
+                all_file.append([i,file_path])
+    print(all_file)
+    paginator = Paginator(all_file, 10)  # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        contacts = paginator.page(1)
+    except EmptyPage:
+        contacts = paginator.page(paginator.num_pages)
+    return render(request, 'cat_down_log.html', {"contacts": contacts,'service_name':[service_name]})
