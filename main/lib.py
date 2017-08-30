@@ -24,20 +24,19 @@ class docker_initial(object):
         container_all = docker_container_all[hostname]
         for i in container_all:
             if i.name == container_name:
-                if i.name == container_name:
-                    if i.status  == 'running':
-                        if find_time:
-                            find_time = int(find_time)
-                            datetime_now = datetime.datetime.now() + datetime.timedelta(minutes=-find_time)
-                            print(datetime_now)
-                            b_logs = i.logs(since=datetime_now) #,since=datetime.datetime.now()
-                            return b_logs
-                        else:
-                            b_logs = i.logs(tail=dao_config.log_tail_line)  # ,since=datetime.datetime.now()
-                            return b_logs
+                if i.status  == 'running':
+                    if find_time:
+                        find_time = int(find_time)
+                        datetime_now = datetime.datetime.now() + datetime.timedelta(minutes=-find_time)
+                        print(datetime_now)
+                        b_logs = i.logs(since=datetime_now) #,since=datetime.datetime.now()
+                        return b_logs
                     else:
-                        results_all = bytes('此容器状态为exited,请检查', encoding = "utf8")
-                        return results_all
+                        b_logs = i.logs(tail=dao_config.log_tail_line)  # ,since=datetime.datetime.now()
+                        return b_logs
+                else:
+                    results_all = bytes('此容器状态为exited,请检查', encoding = "utf8")
+                    return results_all
 
     #docker log的备份，分两种方式，一种是所有的日志全部备份在升级前，第二种是开发人员查看当天的日志需要进行下拉下载操作临时文件都保存在了tmp目录下
     def docker_update_log(self,all_log=None,hostname=None,container_name=None):
