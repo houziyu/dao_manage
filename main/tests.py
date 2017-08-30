@@ -20,7 +20,7 @@
 # for i in dd :
 #     cc.append(float(i))
 # print(cc)
-# for i in cc:
+#
 #     print(type(i))
 # aa = ['docker_dev2-manage-service-2017-08-27.log','docker_dev2-manage-service-2017-08-23.log','docker_dev2-manage-service-2017-08-26.log','docker_dev2-manage-service-2017-08-22.log','docker_dev2-manage-service-2017-08-24.log','docker_dev2-manage-service-2017-08-20.log']
 # print(aa)
