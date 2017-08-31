@@ -12,14 +12,15 @@ dao_manage项目
 -----------
 3.测试环境示例图片：
 -----------
-![](https://github.com/houziyu/dao_manage/raw/master/document/img/login.png)
-![](https://github.com/houziyu/dao_manage/raw/master/document/img/dashboard.png)
-![](https://github.com/houziyu/dao_manage/raw/master/document/img/log.png)
-![](https://github.com/houziyu/dao_manage/raw/master/document/img/oldlog.png)  
+![](https://github.com/houziyu/dao_manage/raw/master/img/login.png)
+![](https://github.com/houziyu/dao_manage/raw/master/img/dashboard.png)
+![](https://github.com/houziyu/dao_manage/raw/master/img/log.png)
+![](https://github.com/houziyu/dao_manage/raw/master/img/oldlog.png)  
 -----------
 4.安装方法：
 -----------
-[github]:http://www.baidu.com/img/bdlogo.gif "安装文档" 
+>1.安装python3:略<br>
+>2.
 -----------
 5.联系方式：
 -----------
