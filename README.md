@@ -19,7 +19,7 @@ dao_manage项目
 -----------
 4.安装方法：
 -----------
-[github]:http://www.baidu.com/img/bdlogo.gif "安装文档" 
+[github]:https://github.com/houziyu/dao_manage/blob/master/document/INSTALL.md "安装文档" 
 -----------
 5.联系方式：
 -----------
