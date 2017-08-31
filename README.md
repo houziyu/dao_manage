@@ -12,8 +12,9 @@ dao_manage项目
 -----------
 3.测试环境示例图片：
 -----------
-![](https://github.com/houziyu/dao_manage/raw/master/img/login.png)  
-![](https://github.com/houziyu/dao_manage/raw/master/img/log.png)  
+![](https://github.com/houziyu/dao_manage/raw/master/img/login.png)
+![](https://github.com/houziyu/dao_manage/raw/master/img/dashboard.png)
+![](https://github.com/houziyu/dao_manage/raw/master/img/log.png)
 ![](https://github.com/houziyu/dao_manage/raw/master/img/oldlog.png)  
 -----------
 4.安装方法：
