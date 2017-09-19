@@ -3,7 +3,9 @@
     <title>clx自动化运维平台</title>
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/base.css" rel="stylesheet">
+
     <script type="text/JavaScript" src="/static/js/jquery.min.js"></script>
+    <script type="text/JavaScript" src="/static/js/echarts.min.js"></script>
     {% block extra-head-resources %}{% endblock %}
 
 </head>
@@ -21,12 +23,15 @@
             <a class="right_logout" style="text-decoration: none" href="/update_log/?all_log=all">更新代码前备份日志</a>
         </div>
     </div>
-    <div class="left_div">
-        <a class="left_a" style="text-decoration: none" href="{% url 'dashboard' %}">docker仪表盘</a>
-    </div>
-    <div class="left_div1">
-        <a class="left_a" style="text-decoration: none" href="{% url 'dir_log' %}">Log查询下载</a>
-    </div>
+        <div class="left_div">
+            <a class="left_a" style="text-decoration: none" href="{% url 'dashboard' %}">docker仪表盘</a>
+        </div>
+        <div class="left_div1">
+            <a class="left_a" style="text-decoration: none" href="{% url 'dir_log' %}">Log查询下载</a>
+        </div>
+        <div class="left_div2">
+            <a class="left_a" style="text-decoration: none" href="{% url 'performance' %}">容器性能图表</a>
+        </div>
     <div class="content_dir">
      {% block body %}
      {% endblock %}

@@ -1,6 +1,7 @@
 from main.lib import docker_initial
 import datetime
 from config import dao_config
+from urllib import request
 
 #定时下拉备份日志 python3 manage.py crontab add  启动后记得添加上定时任务(python3 manage.py crontab remove)删除
 def cron_download_log():
@@ -20,3 +21,9 @@ def cron_download_log():
                     log_file.write('执行时间:'+log_date)
                     log_file.write(log_str)
                     log_file.close()
+#访问并下载容器状态数据
+def download_status_data():
+    response = request.urlopen(r'http://127.0.0.1:8080/data_acquisition/')  # <http.client.HTTPResponse object at 0x00000000048BC908> HTTPResponse类型
+    page = response.read()
+    page = page.decode('utf-8')
+    print(page)

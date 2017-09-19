@@ -27,4 +27,6 @@ urlpatterns = [
     url(r'^update_log/$', views.update_log, name='update_log'),
     url(r'^dir_log/$', views.dir_log, name='dir_log'),
     url(r'^html_page/$',views.html_page,name='html_page'),
+    url(r'^performance/$',views.performance,name='performance'),
+    url(r'^data_acquisition/$',views.data_acquisition,name='data_acquisition'),
 ]
