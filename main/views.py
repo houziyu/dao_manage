@@ -111,17 +111,14 @@ def readFile(filename,chunk_size=512):
 @login_required(login_url='/login/')
 def dir_log(request):
     if request.method == 'GET':
-        service_name_list = dao_config.service_name_list
-        service_now_list = []
-        service_name_all = []
         log_path = dao_config.log_dir_master
-        for i in service_name_list:
-            service_name_path = log_path + i + '-service'
-            service_name_service = i + '-service'
-            service_name_all.append(service_name_service)
-            service_now_list.append(service_name_path)
-        service_now = {'service_now': service_name_all}
-        return render(request, 'dir_log.html', service_now)
+        service_name_all = []
+        list = os.listdir(log_path)
+        for line in list:
+            filepath = os.path.join(log_path, line)
+            if os.path.isdir(filepath):
+                service_name_all.append(line)
+        return render(request, 'dir_log.html', {'service_now': service_name_all})
 
 @login_required(login_url='/login/')
 def html_page(request):
@@ -170,6 +167,8 @@ def performance(request):
             time.append(new_time.strftime('%H:%M:%S'))
             cpu.append(i.cpu)
         print(time)
+        print(mem)
+        print(cpu)
         host_all = {'time':time,'mem':mem,'cpu':cpu}
 
         print(host_all['time'])

@@ -1,67 +1,33 @@
-# import  os
+import  os
 import docker,time,datetime
 # from main import models
 import pprint
 # # import datetime
+
+
+dir = '/log_everyone_bak/'
+
+
+
+list = os.listdir(dir)
+for line in list:
+    filepath = os.path.join(dir,line)
+    if os.path.isdir(filepath):
+        print('dir',line)
+    elif os.path.isfile(filepath):
+        aa = os.path.realpath(line)
+        print('file',aa)
+# print(list)
+
+
+
+
+
+
+
+
+
 # # #
-# # #
-# # #
-# #初始化
-num = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
-
-k = ['零', '十', '百', '千', '万', '十', '百']
-import time
-
-
-def rankid():
-    rank = []
-    for i in range(99999):
-        a = tstr(i)
-        rank.append(a)
-    return rank
-
-
-# 取整取余并连接，返回连接好的字符串和余数
-def turn(x, y):
-    if y >= 1:
-        a = x // pow(10, y)
-        b = x % pow(10, y)
-        c = num[a] + k[y]
-        if y > 4 and b < pow(10, 4):
-            c += k[4]
-        if (len(str(x)) - len(str(b))) >= 2 and b != 0:
-            c += k[0]
-    else:
-        a = x
-        b = 0
-        c = num[a]
-
-    return (c, b,)
-
-
-# 调用上一个函数，以保证进行完所有的数并返回
-def tstr(x):
-    c = turn(x, (len(str(x)) - 1))
-    a = c[0]
-    b = c[1]
-    while b != 0:
-        a += turn(b, (len(str(b)) - 1))[0]
-        b = turn(b, (len(str(b)) - 1))[1]
-
-    return a
-
-
-start = time.time()
-
-ranki = rankid()
-print(ranki)
-end = time.time() - start
-print('程序共用时:%0.2f' % end)
-f = open('/Users/yunque/Desktop/rongNtong.txt','w+')
-for i in ranki:
-    name = ('荣'+i+'彤'+'\r\n')
-    f.write(name)
-f.close( )
 
 # from urllib import request
 # response = request.urlopen(r'http://127.0.0.1:8080/data_acquisition/') # <http.client.HTTPResponse object at 0x00000000048BC908> HTTPResponse类型
@@ -72,7 +38,7 @@ f.close( )
 # docker_singleton = docker.DockerClient(base_url='tcp://docker_node2:2375')
 # docker_con = docker_singleton.containers.list()
 # aa = docker_con[0]
-# bb = aa.stats(stream=False)
+# print(aa.logs(follow=True))
 # # print(pprint.pformat(bb))
 # #cpu使用百分比
 # cpu_total_usage = bb['cpu_stats']['cpu_usage']['total_usage']
