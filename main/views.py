@@ -248,6 +248,7 @@ def script_execution(request):
         script_parameter = ''
     print(script_parameter, script_path, server_name)
     result = ssh_connect(server_name,script_path,script_parameter)
+    print(result)
     return HttpResponse(result)
 
 def ssh_connect(server_name,script_path,script_parameter):
@@ -262,7 +263,10 @@ def ssh_connect(server_name,script_path,script_parameter):
                 username='root',
                 pkey=pkey)
     stdin, stdout, stderr = ssh.exec_command(command)
-    if stderr.read().decode():
-        return stderr.read().decode()
-    return  stdout.read().decode()
+    out_log_all=stdout.read().decode()
+    err_log_all=stderr.read().decode()
+    ssh.close()
+    if err_log_all:
+        return err_log_all
+    return   out_log_all
 
