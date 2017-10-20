@@ -248,7 +248,7 @@ def script_execution(request):
         script_parameter = ''
     result = ssh_connect(server_name,script_path,script_parameter)
     print(result.replace('\n','<br>'))
-    return HttpResponse(result)
+    return HttpResponse(mark_safe(result))
 
 def ssh_connect(server_name,script_path,script_parameter):
     pkey = paramiko.RSAKey.from_private_key_file(dao_config.key_address)
