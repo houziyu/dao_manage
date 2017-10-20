@@ -29,4 +29,6 @@ urlpatterns = [
     url(r'^html_page/$',views.html_page,name='html_page'),
     url(r'^performance/$',views.performance,name='performance'),
     url(r'^data_acquisition/$',views.data_acquisition,name='data_acquisition'),
+    url(r'^script/$',views.script,name='script'),
+    url(r'^script/execution/$',views.script_execution,name='script_execution'),
 ]

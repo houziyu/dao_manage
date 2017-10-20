@@ -22,8 +22,8 @@ def cron_download_log():
                     log_file.write(log_str)
                     log_file.close()
 #访问并下载容器状态数据
-def download_status_data():
-    response = request.urlopen(r'http://127.0.0.1:8080/data_acquisition/')  # <http.client.HTTPResponse object at 0x00000000048BC908> HTTPResponse类型
-    page = response.read()
-    page = page.decode('utf-8')
-    print(page)
+# def download_status_data():
+#     response = request.urlopen(r'http://127.0.0.1:8080/data_acquisition/')  # <http.client.HTTPResponse object at 0x00000000048BC908> HTTPResponse类型
+#     page = response.read()
+#     page = page.decode('utf-8')
+#     print(page)

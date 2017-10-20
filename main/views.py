@@ -9,6 +9,7 @@ from main import models
 import os,zipfile,json,datetime
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import paramiko
 # Create your views here.
 
 def index(request):
@@ -164,7 +165,8 @@ def performance(request):
         for i in row :
             mem.append(i.mem)
             new_time = i.datetime + datetime.timedelta(hours=8)
-            time.append(new_time.strftime('%H:%M:%S'))
+            # time.append(new_time.strftime('%H:%M:%S'))
+            time.append(new_time.strftime("%H:%M:%S"))
             cpu.append(i.cpu)
         print(time)
         print(mem)
@@ -231,3 +233,36 @@ def data_acquisition(request):
                 }
             # print(return_data)
     return HttpResponse('ok')
+
+@login_required(login_url='/login/')
+def script(request):
+    script_all = models.script_data.objects.all()
+    return render(request, 'script.html',context={'script_all':script_all})
+
+@login_required(login_url='/login/')
+def script_execution(request):
+    script_path = request.GET.get('script_path')
+    server_name = request.GET.get('server_name')
+    script_parameter = request.GET.get('script_parameter')
+    if script_parameter == '无':
+        script_parameter = ''
+    print(script_parameter, script_path, server_name)
+    result = ssh_connect(server_name,script_path,script_parameter)
+    return HttpResponse(result)
+
+def ssh_connect(server_name,script_path,script_parameter):
+    pkey = paramiko.RSAKey.from_private_key_file(dao_config.key_address)
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    command = "bash" + ' ' +script_path + ' ' + script_parameter
+    print(command)
+    ssh.connect(
+                hostname=server_name,
+                port=22,
+                username='root',
+                pkey=pkey)
+    stdin, stdout, stderr = ssh.exec_command(command)
+    if stderr.read().decode():
+        return stderr.read().decode()
+    return  stdout.read().decode()
+

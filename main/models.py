@@ -9,3 +9,20 @@ class monitoring_data(models.Model):
     datetime = models.DateTimeField(auto_now = True)
     container_name = models.CharField(max_length=30,default=None)
     name = models.CharField(max_length=30)
+    def __str__(self):
+        return self.name
+
+class all_parameter(models.Model):
+    parameter = models.CharField(max_length=20)
+    def __str__(self):
+        return self.parameter
+
+
+class script_data(models.Model):
+    script_name = models.CharField(max_length=40)
+    script_path = models.CharField(max_length=100)
+    service_name = models.CharField(max_length=40)
+    server_name = models.CharField(max_length=40)
+    script_parameter = models.ManyToManyField(all_parameter)
+    def __str__(self):
+        return self.script_name
