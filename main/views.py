@@ -273,6 +273,6 @@ def ssh_connect(server_name,script_path,script_parameter):
     for i in err_log_list:
         err_log_all = err_log_all +i
     if err_log_all:
-        return err_log_all
+        return err_log_all 
     return   out_log_all
 
