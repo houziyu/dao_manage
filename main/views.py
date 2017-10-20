@@ -263,9 +263,15 @@ def ssh_connect(server_name,script_path,script_parameter):
                 username='root',
                 pkey=pkey)
     stdin, stdout, stderr = ssh.exec_command(command)
-    out_log_all=stdout.read().decode()
-    err_log_all=stderr.read().decode()
+    out_log_list=stdout.readlines().decode()
+    err_log_list=stderr.readlines().decode()
     ssh.close()
+    out_log_all=''
+    err_log_all = ''
+    for i in out_log_all:
+        out_log_all = out_log_all +i
+    for i in err_log_list:
+        err_log_all = err_log_all +i
     if err_log_all:
         return err_log_all
     return   out_log_all
