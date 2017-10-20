@@ -247,7 +247,7 @@ def script_execution(request):
     if script_parameter == '无':
         script_parameter = ''
     result = ssh_connect(server_name,script_path,script_parameter)
-    result = result.replace('\n','<br>')
+    result = mark_safe(result)
 
     return render(request, 'script_results.html', {'result':result})
 
