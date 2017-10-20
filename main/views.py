@@ -246,9 +246,8 @@ def script_execution(request):
     script_parameter = request.GET.get('script_parameter')
     if script_parameter == '无':
         script_parameter = ''
-    print(script_parameter, script_path, server_name)
     result = ssh_connect(server_name,script_path,script_parameter)
-    print(result)
+    print(result.replace('\n','<br>'))
     return HttpResponse(result)
 
 def ssh_connect(server_name,script_path,script_parameter):
