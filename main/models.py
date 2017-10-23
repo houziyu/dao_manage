@@ -23,6 +23,6 @@ class script_data(models.Model):
     script_path = models.CharField(max_length=100)
     service_name = models.CharField(max_length=40)
     server_name = models.CharField(max_length=40)
-    script_parameter = models.ManyToManyField(all_parameter)
+    script_parameter = models.ManyToManyField(all_parameter,blank=True)
     def __str__(self):
         return self.script_name

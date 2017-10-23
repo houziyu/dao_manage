@@ -266,7 +266,7 @@ def ssh_connect(server_name,script_path,script_parameter):
     # out_log_all=stdout.readlines().decode()
     out_log_all = stdout.read().decode()
     err_log_all=stderr.read().decode()
-    ssh.close() 
+    ssh.close()
     if err_log_all:
         return err_log_all
     return   out_log_all
