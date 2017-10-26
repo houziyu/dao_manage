@@ -244,12 +244,18 @@ def script_execution(request):
     script_path = request.GET.get('script_path')
     server_name = request.GET.get('server_name')
     script_parameter = request.GET.get('script_parameter')
-    if script_parameter == '无':
-        script_parameter = ''
-    result = ssh_connect(server_name,script_path,script_parameter)
-    result = mark_safe(result)
-
-    return render(request, 'script_results.html', {'result':result})
+    script_status = models.script_data.objects.filter(script_path=script_path).all()[0].status
+    if script_status == 1 :
+        models.script_data.objects.filter(script_path=script_path).update(status=2)
+        if script_parameter == '无':
+            script_parameter = ''
+        result = ssh_connect(server_name,script_path,script_parameter)
+        result = mark_safe(result)
+        models.script_data.objects.filter(script_path=script_path).update(status=1)
+        return render(request, 'script_results.html', {'result':result})
+    elif script_status == 2 :
+        error = '正在编译。请稍后再试。'
+        return render(request, 'script_results.html', {'error':error})
 
 def ssh_connect(server_name,script_path,script_parameter):
     pkey = paramiko.RSAKey.from_private_key_file(dao_config.key_address)
