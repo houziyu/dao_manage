@@ -104,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 CRONJOBS = [
-    ('0 9 * * *', 'main.cron_download_log.cron_download_log'),
+    ('0 9 * * *', 'main.cron_download_log.ctron_download_log'),
     # ('* * * * *', 'main.cron_download_log.download_status_data')
 ]
 # Internationalization
